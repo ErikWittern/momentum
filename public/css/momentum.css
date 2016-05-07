@@ -1,3 +1,12 @@
+.momentum-deactive {
+  color: gray;
+}
+
+.momentum-link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .momentum-status {
   color: green;
 }

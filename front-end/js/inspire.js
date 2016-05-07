@@ -44,7 +44,6 @@ var Inspire = React.createClass({
     } else {
       var i = 0
       cands = this.state.candidates.map(e => {
-        console.log(e)
         return (<Candidate data={e} key={i++} />)
       })
     }

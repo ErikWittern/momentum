@@ -10,10 +10,10 @@ var Welcome = React.createClass({
       <div>
         <h2>
           Right now, I'd like
-          to <span intention={'eat'} onClick={this.handleClick.bind(null, 'eat')}>eat</span>
-          , <span intention={'drink'} onClick={this.handleClick.bind(null, 'drink')}>drink</span>
-          , <span intention={'explore'} onClick={this.handleClick.bind(null, 'explore')}>explore</span>
-          , <span intention={'party'} onClick={this.handleClick.bind(null, 'party')}>party</span>
+          to <span className='momentum-link' intention={'eat'} onClick={this.handleClick.bind(null, 'eat')}>eat</span>
+          , <span className='momentum-link' intention={'drink'} onClick={this.handleClick.bind(null, 'drink')}>drink</span>
+          , <span className='momentum-link' intention={'explore'} onClick={this.handleClick.bind(null, 'explore')}>explore</span>
+          , <span className='momentum-link' intention={'party'} onClick={this.handleClick.bind(null, 'party')}>party</span>
         </h2>
       </div>
     )

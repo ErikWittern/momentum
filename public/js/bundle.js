@@ -62,13 +62,14 @@
 	
 	var _reactBootstrap = __webpack_require__(171);
 	
+	var _navigation = __webpack_require__(444);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	/**
-	 * Main file containing the root of our app.
-	 **/
+	var request = __webpack_require__(436); /**
+	                                      * Main file containing the root of our app.
+	                                      **/
 	
-	var request = __webpack_require__(436);
 	
 	var MomentumApp = _react2.default.createClass({
 	  displayName: 'MomentumApp',
@@ -172,7 +173,10 @@
 	        break;
 	    }
 	
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h1', null, 'M'), _react2.default.createElement(_reactBootstrap.Nav, { bsStyle: 'pills', activeKey: 1, onSelect: this.handleNav }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspiration' }, 'Get'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspire' }, 'Give')), page);
+	    return _react2.default.createElement(_reactBootstrap.Grid, { fluid: true }, _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement('h1', null, 'M'), _react2.default.createElement(_navigation.Navigation, {
+	      neighborhood: this.state.neighborhood,
+	      currentView: this.state.currentView,
+	      handleNav: this.handleNav }), page)));
 	  }
 	});
 	
@@ -20354,7 +20358,6 @@
 	    } else {
 	      var i = 0;
 	      cands = this.state.candidates.map(function (e) {
-	        console.log(e);
 	        return _react2.default.createElement(_candidate.Candidate, { data: e, key: i++ });
 	      });
 	    }
@@ -41095,7 +41098,7 @@
 	    this.props.onIntentionSelection(intention);
 	  },
 	  render: function render() {
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { intention: 'eat', onClick: this.handleClick.bind(null, 'eat') }, 'eat'), ', ', _react2.default.createElement('span', { intention: 'drink', onClick: this.handleClick.bind(null, 'drink') }, 'drink'), ', ', _react2.default.createElement('span', { intention: 'explore', onClick: this.handleClick.bind(null, 'explore') }, 'explore'), ', ', _react2.default.createElement('span', { intention: 'party', onClick: this.handleClick.bind(null, 'party') }, 'party')));
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'eat', onClick: this.handleClick.bind(null, 'eat') }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'drink', onClick: this.handleClick.bind(null, 'drink') }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'explore', onClick: this.handleClick.bind(null, 'explore') }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'party', onClick: this.handleClick.bind(null, 'party') }, 'party')));
 	  }
 	});
 	
@@ -41149,6 +41152,52 @@
 	});
 	
 	exports.Candidate = Candidate;
+
+/***/ },
+/* 444 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Navigation = undefined;
+	
+	var _react = __webpack_require__(162);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Navigation = _react2.default.createClass({
+	  displayName: 'Navigation',
+	
+	  handleClick: function handleClick(view) {
+	    this.props.handleNav(view);
+	    console.log(view);
+	  },
+	  render: function render() {
+	    console.log(this.props.neighborhood);
+	    var get;
+	    var give;
+	    if (this.props.currentView === 'inspiration' || this.props.currentView === 'welcome') {
+	      get = _react2.default.createElement('span', null, 'Get ');
+	      if (this.props.neighborhood) {
+	        give = _react2.default.createElement('span', { className: 'momentum-link', onClick: this.handleClick.bind(null, 'inspire') }, 'Give');
+	      } else {
+	        give = _react2.default.createElement('span', { className: 'momentum-deactive' }, 'Give');
+	      }
+	    } else {
+	      get = _react2.default.createElement('span', { className: 'momentum-link', onClick: this.handleClick.bind(null, 'welcome') }, 'Get ');
+	      give = _react2.default.createElement('span', null, 'Give');
+	    }
+	
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, get, give));
+	  }
+	});
+	
+	exports.Navigation = Navigation;
 
 /***/ }
 /******/ ]);
