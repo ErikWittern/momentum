@@ -12,6 +12,7 @@
       <th>Neighborhood</th>
       <th>City</th>
       <th>Country</th>
+      <th>Google place</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -26,6 +27,7 @@
         <td><%= place.neighborhood %></td>
         <td><%= place.city %></td>
         <td><%= place.country %></td>
+        <td><%= place.google_place_id %></td>
         <td><%= link_to 'Show', place %></td>
         <td><%= link_to 'Edit', edit_place_path(place) %></td>
         <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>

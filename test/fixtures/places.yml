@@ -8,6 +8,7 @@ one:
   neighborhood: MyString
   city: MyString
   country: MyString
+  google_place_id: MyString
 
 two:
   name: MyString
@@ -17,3 +18,4 @@ two:
   neighborhood: MyString
   city: MyString
   country: MyString
+  google_place_id: MyString

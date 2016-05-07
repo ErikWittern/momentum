@@ -35,5 +35,10 @@
   <%= @place.country %>
 </p>
 
+<p>
+  <strong>Google place:</strong>
+  <%= @place.google_place_id %>
+</p>
+
 <%= link_to 'Edit', edit_place_path(@place) %> |
 <%= link_to 'Back', places_path %>
