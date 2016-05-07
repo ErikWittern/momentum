@@ -131,11 +131,11 @@ var MomentumApp = React.createClass({
 
     return (
       <div>
-        <h1>Momentum App</h1>
+        <h1>M</h1>
 
         <Nav bsStyle='pills' activeKey={1} onSelect={this.handleNav}>
-          <NavItem eventKey={'inspiration'}>Inspiration</NavItem>
-          <NavItem eventKey={'inspire'}>Inspire</NavItem>
+          <NavItem eventKey={'inspiration'}>Get</NavItem>
+          <NavItem eventKey={'inspire'}>Give</NavItem>
         </Nav>
 
         {page}
