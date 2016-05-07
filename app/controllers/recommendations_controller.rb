@@ -1,6 +1,22 @@
+require 'date'
+
 class RecommendationsController < ApplicationController
   before_action :set_recommendation, only: [:show, :edit, :update, :destroy]
 
+
+  # Given recommendations filtered by user and neighborhood
+  # return the status (:novice, :regular, :local)
+  def retrieve_status(recommendations)
+    score = 0
+    recommendations.each { |recommendation|
+      score += recommendation.by_role * (1 / days_since(recommendation.created_at))
+    }
+  end
+
+  def days_since(date)
+    date - Date.today
+  end
+  
   # GET /recommendations
   # GET /recommendations.json
   def index

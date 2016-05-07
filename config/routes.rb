@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  get '/app', to: 'app#index'
+  get 'app/index'
 
-  resources :places
+  devise_for :users, controllers: { omniauth_callbacks: "callbacks" }
   resources :recommendations
-  resources :users
+  resources :places
+
+  # post 'sign_in', :to => 'devise/session#create', :as => :session
+
+  root 'places#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

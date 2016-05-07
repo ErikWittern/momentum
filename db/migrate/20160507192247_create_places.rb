@@ -8,6 +8,7 @@ class CreatePlaces < ActiveRecord::Migration
       t.string :neighborhood
       t.string :city
       t.string :country
+      t.string :google_place_id
 
       t.timestamps null: false
     end
