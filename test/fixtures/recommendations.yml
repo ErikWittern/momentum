@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  eat: false
+  drink: false
+  explore: false
+  party: false
+  by_role: MyString
+  user_id: 
+  place_id: 
+
+two:
+  eat: false
+  drink: false
+  explore: false
+  party: false
+  by_role: MyString
+  user_id: 
+  place_id: 

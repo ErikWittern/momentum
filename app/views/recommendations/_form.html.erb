@@ -1,0 +1,45 @@
+<%= form_for(@recommendation) do |f| %>
+  <% if @recommendation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@recommendation.errors.count, "error") %> prohibited this recommendation from being saved:</h2>
+
+      <ul>
+      <% @recommendation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :eat %><br>
+    <%= f.check_box :eat %>
+  </div>
+  <div class="field">
+    <%= f.label :drink %><br>
+    <%= f.check_box :drink %>
+  </div>
+  <div class="field">
+    <%= f.label :explore %><br>
+    <%= f.check_box :explore %>
+  </div>
+  <div class="field">
+    <%= f.label :party %><br>
+    <%= f.check_box :party %>
+  </div>
+  <div class="field">
+    <%= f.label :by_role %><br>
+    <%= f.text_field :by_role %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :place_id %><br>
+    <%= f.text_field :place_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

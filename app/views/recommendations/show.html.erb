@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Eat:</strong>
+  <%= @recommendation.eat %>
+</p>
+
+<p>
+  <strong>Drink:</strong>
+  <%= @recommendation.drink %>
+</p>
+
+<p>
+  <strong>Explore:</strong>
+  <%= @recommendation.explore %>
+</p>
+
+<p>
+  <strong>Party:</strong>
+  <%= @recommendation.party %>
+</p>
+
+<p>
+  <strong>By role:</strong>
+  <%= @recommendation.by_role %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @recommendation.user %>
+</p>
+
+<p>
+  <strong>Place:</strong>
+  <%= @recommendation.place %>
+</p>
+
+<%= link_to 'Edit', edit_recommendation_path(@recommendation) %> |
+<%= link_to 'Back', recommendations_path %>
