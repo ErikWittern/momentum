@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/app', to: 'app#index'
+
   resources :places
   resources :recommendations
   resources :users
