@@ -6,7 +6,8 @@ import React from 'react'
 import { Welcome } from './welcome'
 import { Inspiration } from './inspiration'
 import { Inspire } from './inspire'
-import { Nav, NavItem } from 'react-bootstrap'
+import { Grid, Row, Col, Nav, NavItem } from 'react-bootstrap'
+import { Navigation } from './navigation'
 var request = require('superagent')
 
 var MomentumApp = React.createClass({
@@ -130,16 +131,20 @@ var MomentumApp = React.createClass({
     }
 
     return (
-      <div>
-        <h1>M</h1>
+      <Grid fluid>
+        <Row>
+          <div className='col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
+            <h1>M</h1>
 
-        <Nav bsStyle='pills' activeKey={1} onSelect={this.handleNav}>
-          <NavItem eventKey={'inspiration'}>Get</NavItem>
-          <NavItem eventKey={'inspire'}>Give</NavItem>
-        </Nav>
+            <Navigation
+              neighborhood={this.state.neighborhood}
+              currentView={this.state.currentView}
+              handleNav={this.handleNav} />
 
-        {page}
-      </div>
+            {page}
+          </div>
+        </Row>
+      </Grid>
     )
   }
 })
