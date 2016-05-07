@@ -3,6 +3,7 @@
  **/
 import ReactDOM from 'react-dom'
 import React from 'react'
+import { Welcome } from './welcome'
 import { Inspiration } from './inspiration'
 import { Inspire } from './inspire'
 import { Nav, NavItem } from 'react-bootstrap'
@@ -15,13 +16,19 @@ var MomentumApp = React.createClass({
 
   getInitialState () {
     return {
-      currentView: 'inspiration',
-      latitude: null,
-      longitude: null,
+      currentView: 'welcome',
+      lat: null,
+      lng: null,
       neighborhood: null,
       day: null,
-      time: null
+      time: null,
+      intention: null,
+      status: 'novice'
     }
+  },
+
+  handleWelcomeSelection (intention) {
+    this.setState({intention: intention, currentView: 'inspiration'})
   },
 
   componentDidMount () {
@@ -37,8 +44,8 @@ var MomentumApp = React.createClass({
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (location) {
         this.setState({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude
+          lat: location.coords.latitude,
+          lng: location.coords.longitude
         })
         console.log(location.coords.latitude, location.coords.longitude)
         this.getNeighborhood(location.coords.latitude, location.coords.longitude)
@@ -103,11 +110,19 @@ var MomentumApp = React.createClass({
   render () {
     var page
     switch (this.state.currentView) {
+      case 'welcome':
+        page = <Welcome onIntentionSelection={this.handleWelcomeSelection} />
+        break
       case 'inspiration':
-        page = <Inspiration />
+        page = (<Inspiration
+          day={this.state.day}
+          time={this.state.time}
+          neighborhood={this.state.neighborhood}
+          intention={this.state.intention}
+          status={this.state.status} />)
         break
       case 'inspire':
-        page = <Inspire />
+        page = <Inspire lat={this.state.lat} lng={this.state.lng} />
         break
       default:
         page = <Inspiration />
@@ -117,9 +132,7 @@ var MomentumApp = React.createClass({
     return (
       <div>
         <h1>Momentum App</h1>
-        {this.state.day}
-        {this.state.time}
-        {this.state.neighborhood}
+
         <Nav bsStyle='pills' activeKey={1} onSelect={this.handleNav}>
           <NavItem eventKey={'inspiration'}>Inspiration</NavItem>
           <NavItem eventKey={'inspire'}>Inspire</NavItem>
