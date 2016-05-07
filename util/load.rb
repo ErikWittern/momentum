@@ -19,8 +19,18 @@ url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{l
 response = Unirest.get(url)
 results = response.body['results']
 
-# TODO: need to find the "neighborhood" value based on lng, lat and then update
 
 results.each do |result|
-  Place.create(name: result['name'], google_place_id: result['place_id'], longitude: result['geometry']['location']['lng'], latitude: result['geometry']['location']['lat'], city: 'New York City', country: 'USA')
+  # TODO: need to find the "neighborhood" value based on lng, lat and then update
+  # neighborhood =
+
+  Place.create(
+    name: result['name'],
+    google_place_id: result['place_id'],
+    longitude: result['geometry']['location']['lng'],
+    latitude: result['geometry']['location']['lat'],
+    # neighborhood: neighborhood,
+    city: 'New York City',
+    country: 'USA'
+  )
 end
