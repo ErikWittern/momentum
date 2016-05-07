@@ -79,11 +79,14 @@
 	      currentView: 'inspiration',
 	      latitude: null,
 	      longitude: null,
-	      neighborhood: null
+	      neighborhood: null,
+	      day: null,
+	      time: null
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
 	    this.requestCurrentPosition();
+	    this.getDayAndTime();
 	  },
 	  handleNav: function handleNav(selectedKey) {
 	    this.setState({ currentView: selectedKey });
@@ -129,6 +132,16 @@
 	  getNeighborhoodUrl: function getNeighborhoodUrl(lat, lng) {
 	    return this.constants.neighborhoodUrl + lat + ',' + lng;
 	  },
+	  getDayAndTime: function getDayAndTime() {
+	    var d = new Date();
+	    var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	    var time = ['night', 'night', 'night', 'night', 'night', // until 5 am
+	    'morning', 'morning', 'morning', 'morning', 'morning', 'morning', 'morning', // until noon
+	    'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', // until 6
+	    'evening', 'evening', 'evening', 'evening', 'evening', 'evening'];
+	    this.setState({ day: weekday[d.getDay()] });
+	    this.setState({ time: time[d.getHours()] });
+	  },
 	  render: function render() {
 	    var page;
 	    switch (this.state.currentView) {
@@ -143,7 +156,7 @@
 	        break;
 	    }
 	
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h1', null, 'Momentum App'), this.state.neighborhood, _react2.default.createElement(_reactBootstrap.Nav, { bsStyle: 'pills', activeKey: 1, onSelect: this.handleNav }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspiration' }, 'Inspiration'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspire' }, 'Inspire')), page);
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h1', null, 'Momentum App'), this.state.day, this.state.time, this.state.neighborhood, _react2.default.createElement(_reactBootstrap.Nav, { bsStyle: 'pills', activeKey: 1, onSelect: this.handleNav }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspiration' }, 'Inspiration'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspire' }, 'Inspire')), page);
 	  }
 	});
 	

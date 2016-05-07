@@ -18,12 +18,15 @@ var MomentumApp = React.createClass({
       currentView: 'inspiration',
       latitude: null,
       longitude: null,
-      neighborhood: null
+      neighborhood: null,
+      day: null,
+      time: null
     }
   },
 
   componentDidMount () {
     this.requestCurrentPosition()
+    this.getDayAndTime()
   },
 
   handleNav (selectedKey) {
@@ -76,6 +79,27 @@ var MomentumApp = React.createClass({
     return this.constants.neighborhoodUrl + lat + ',' + lng
   },
 
+  getDayAndTime () {
+    var d = new Date()
+    var weekday = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ]
+    var time = [
+      'night', 'night', 'night', 'night', 'night', // until 5 am
+      'morning', 'morning', 'morning', 'morning', 'morning', 'morning', 'morning', // until noon
+      'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', // until 6
+      'evening', 'evening', 'evening', 'evening', 'evening', 'evening'
+    ]
+    this.setState({day: weekday[d.getDay()]})
+    this.setState({time: time[d.getHours()]})
+  },
+
   render () {
     var page
     switch (this.state.currentView) {
@@ -93,6 +117,8 @@ var MomentumApp = React.createClass({
     return (
       <div>
         <h1>Momentum App</h1>
+        {this.state.day}
+        {this.state.time}
         {this.state.neighborhood}
         <Nav bsStyle='pills' activeKey={1} onSelect={this.handleNav}>
           <NavItem eventKey={'inspiration'}>Inspiration</NavItem>
