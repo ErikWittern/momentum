@@ -16,8 +16,8 @@ var MomentumApp = React.createClass({
   getInitialState () {
     return {
       currentView: 'inspiration',
-      longitude: null,
       latitude: null,
+      longitude: null,
       neighborhood: null
     }
   },
@@ -34,21 +34,41 @@ var MomentumApp = React.createClass({
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (location) {
         this.setState({
-          longitude: location.coords.longitude,
-          latitude: location.coords.latitude
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude
         })
+        console.log(location.coords.latitude, location.coords.longitude)
+        this.getNeighborhood(location.coords.latitude, location.coords.longitude)
       }.bind(this))
     }
   },
 
-  getNeighborhood () {
+  getNeighborhood (lat, lng) {
     var self = this
     request
-      .get(this.getNeighborhoodUrl(this.state.latitude, this.state.longitude))
+      .get(this.getNeighborhoodUrl(lat, lng))
       .end(function (err, res) {
         if (err) return
-
-        self.setState({neighborhood: null})
+        var hood
+        if (res.body.results.length > 0) {
+          for (var i in res.body.results[0].address_components) {
+            var locObj = res.body.results[0].address_components[i]
+            if (locObj.types.indexOf('neighborhood') !== -1) {
+              hood = locObj.long_name
+              break
+            }
+          }
+          if (!hood) {
+            for (var j in res.body.results[0].address_components) {
+              var locObj2 = res.body.results[0].address_components[j]
+              if (locObj2.types.indexOf('political') !== -1) {
+                hood = locObj2.long_name
+                break
+              }
+            }
+          }
+        }
+        self.setState({neighborhood: hood})
       })
   },
 
@@ -73,7 +93,7 @@ var MomentumApp = React.createClass({
     return (
       <div>
         <h1>Momentum App</h1>
-        {this.state.latitude},{this.state.longitude}        
+        {this.state.neighborhood}
         <Nav bsStyle='pills' activeKey={1} onSelect={this.handleNav}>
           <NavItem eventKey={'inspiration'}>Inspiration</NavItem>
           <NavItem eventKey={'inspire'}>Inspire</NavItem>
