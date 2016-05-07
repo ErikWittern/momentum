@@ -40,16 +40,6 @@ ActiveRecord::Schema.define(version: 20160505033052) do
   add_index "recommendations", ["place_id"], name: "index_recommendations_on_place_id"
   add_index "recommendations", ["user_id"], name: "index_recommendations_on_user_id"
 
-  create_table "statuses", force: :cascade do |t|
-    t.integer  "place_id"
-    t.string   "status"
-    t.datetime "since"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "statuses", ["place_id"], name: "index_statuses_on_place_id"
-
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"

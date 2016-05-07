@@ -5,7 +5,7 @@ var path = require('path')
 module.exports = {
   entry: path.resolve(__dirname, 'js', 'app.js'),
   output: {
-    path: path.resolve(__dirname, 'assets'),
+    path: path.resolve(__dirname, '../public/js'),
     filename: 'bundle.js'
   },
   module: {
