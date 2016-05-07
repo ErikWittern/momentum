@@ -8,20 +8,59 @@
 
 users = User.create(
   [
-    { username: 'Erik',  email: 'erik@momentum.io' },
-    { username: 'Gesi',  email: 'gesi@momentum.io' },
-    { username: 'Chris', email: 'chris@momentum.io' }
+    { username: 'Erik',   email: 'erik@momentum.io' },
+    { username: 'Gesi',   email: 'gesi@momentum.io' },
+    { username: 'Chris',  email: 'chris@momentum.io' },
+    { username: 'Jurgen', email: 'jurgen@momentum.io' }
   ]
 )
 
 places = Place.create(
   [
-    { name: 'Prince Street Pizza' , description: 'Best pizza ever!  Get the "Special"', longitude: 151.199025, latitude: -33.870775, neighborhood: 'Soho', city: 'New York City', country: 'USA'}
+    {
+      name: 'Prince Street Pizza',
+      description: 'Best pizza ever!  Get the "Special"',
+      longitude: 151.199025,
+      latitude: -33.870775,
+      neighborhood: 'Soho',
+      city: 'New York City',
+      country: 'USA'
+    },
+    {
+      name: 'Best Pizza',
+      description: 'Really the best',
+      longitude: 40.7121463,
+      latitude: -73.965175,
+      neighborhood: 'Williamsburg',
+      city: 'New York City',
+      country: 'USA'
+    },
+    {
+      name: 'Vinnies Pizzeria',
+      description: 'So good',
+      longitude: 40.7121437,
+      latitude: -73.965175,
+      neighborhood: 'Williamsburg',
+      city: 'New York City',
+      country: 'USA'
+    },
+    {
+      name: 'Solo Pizza NYC',
+      description: 'Wicked',
+      longitude: 40.7130545,
+      latitude: -73.9841435,
+      neighborhood: 'East Village',
+      city: 'New York City',
+      country: 'USA'
+    }
   ]
 )
 
 recommendations = Recommendation.create(
   [
-    { eat: true, drink: false, explore: false, party: false, user: users.first, place: places.first }
+    { eat: true, drink: false, explore: false, party: false, user: users[0], place: places[0] },
+    { eat: true, drink: false, explore: false, party: false, user: users[1], place: places[0] },
+    { eat: true, drink: false, explore: false, party: false, user: users[2], place: places[0] },
+    { eat: true, drink: false, explore: false, party: false, user: users[3], place: places[0] },
   ]
 )
