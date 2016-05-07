@@ -172,7 +172,7 @@
 	        break;
 	    }
 	
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h1', null, 'Momentum App'), _react2.default.createElement(_reactBootstrap.Nav, { bsStyle: 'pills', activeKey: 1, onSelect: this.handleNav }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspiration' }, 'Inspiration'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspire' }, 'Inspire')), page);
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h1', null, 'M'), _react2.default.createElement(_reactBootstrap.Nav, { bsStyle: 'pills', activeKey: 1, onSelect: this.handleNav }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspiration' }, 'Get'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'inspire' }, 'Give')), page);
 	  }
 	});
 	
@@ -20308,6 +20308,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _candidate = __webpack_require__(443);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Inspire = _react2.default.createClass({
@@ -20325,14 +20327,13 @@
 	    console.log('fetchPlaces');
 	    var lat = this.props.lat;
 	    var lng = this.props.lng;
-	    var types = ['restaurant'];
 	
 	    var location = new google.maps.LatLng(lat, lng);
 	
 	    var request = {
 	      location: location,
-	      radius: '50',
-	      types: types
+	      radius: '5000',
+	      types: ['restaurants', 'point_of_interest', 'amusement_park', 'art_gallery', 'bakery', 'bar', 'book_store', 'bowling_alley', 'cafe', 'casino', 'clothing_store', 'department_store', 'establishment', 'food', 'furniture_store', 'jewelry_store', 'library', 'liquor_store', 'meal_takeaway', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shoe_store', 'shopping_mall', 'spa', 'stadium', 'store', 'university', 'zoo']
 	    };
 	
 	    var map = new google.maps.Map(document.createElement('div'));
@@ -20342,10 +20343,23 @@
 	      if (status === google.maps.places.PlacesServiceStatus.OK) {
 	        this.setState({ candidates: results });
 	      }
-	    });
+	    }.bind(this));
 	  },
 	  render: function render() {
-	    return _react2.default.createElement('h2', null, 'Inspire...');
+	    var cands;
+	    if (!this.state.candidates) {
+	      cands = _react2.default.createElement('h1', null, 'Working on it...');
+	    } else if (this.state.candidates.length === 0) {
+	      cands = _react2.default.createElement('h1', null, 'Couldn\'t find a place!');
+	    } else {
+	      var i = 0;
+	      cands = this.state.candidates.map(function (e) {
+	        console.log(e);
+	        return _react2.default.createElement(_candidate.Candidate, { data: e, key: i++ });
+	      });
+	    }
+	
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'I want to give Momentum to...'), cands);
 	  }
 	});
 	
@@ -41086,6 +41100,55 @@
 	});
 	
 	exports.Welcome = Welcome;
+
+/***/ },
+/* 443 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Candidate = undefined;
+	
+	var _react = __webpack_require__(162);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactBootstrap = __webpack_require__(171);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Candidate = _react2.default.createClass({
+	  displayName: 'Candidate',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      expanded: false
+	    };
+	  },
+	  handleClick: function handleClick() {
+	    if (this.state.expanded) {
+	      this.setState({ expanded: false });
+	    } else {
+	      this.setState({ expanded: true });
+	    }
+	  },
+	  handleSubmit: function handleSubmit(intention) {
+	    console.log(intention);
+	  },
+	  render: function render() {
+	    var voteUi;
+	    if (this.state.expanded) {
+	      voteUi = _react2.default.createElement('div', null, _react2.default.createElement(_reactBootstrap.Nav, { bsStyle: 'pills', activeKey: 1, onSelect: this.handleSubmit }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'eat' }, 'eat'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'dring' }, 'dring'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'explore' }, 'explore'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'party' }, 'party')));
+	    }
+	
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h3', { onClick: this.handleClick }, this.props.data.name), voteUi);
+	  }
+	});
+	
+	exports.Candidate = Candidate;
 
 /***/ }
 /******/ ]);
