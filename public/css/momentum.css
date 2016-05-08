@@ -9,8 +9,8 @@ h1, h2, h3, h4, h5, h6, p {
   text-align: center;
 }
 
-#map { 
-  width: 400px;
+#map {
+  width: 350px;
   height: 150px;
   margin: auto;
   margin-bottom: 20px;
