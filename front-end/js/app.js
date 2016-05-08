@@ -109,6 +109,10 @@ var MomentumApp = React.createClass({
     this.setState({time: time[d.getHours()]})
   },
 
+  handleRecSubmit () {
+    this.setState({currentView: 'welcome'})
+  },
+
   render () {
     var page
     switch (this.state.currentView) {
@@ -131,7 +135,8 @@ var MomentumApp = React.createClass({
           lng={this.state.lng}
           neighborhood={this.state.neighborhood}
           day={this.state.day}
-          time={this.state.time} />
+          time={this.state.time}
+          handleRecSubmit={this.handleRecSubmit} />
         break
     }
 

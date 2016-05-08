@@ -4,7 +4,21 @@ h1, h2, h3, h4, h5, h6, p {
   color: #181313;
 }
 
-#map { width: 200px; height: 200px; }
+.momentum-place {
+  width: 100%;
+  text-align: center;
+}
+
+#map { 
+  width: 400px;
+  height: 150px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.momentum-place-list {
+  text-align: center;
+}
 
 .momentum-welcome-container {
   margin-top: 50px;

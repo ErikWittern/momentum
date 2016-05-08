@@ -7,7 +7,8 @@ var Inspire = React.createClass({
     lng: React.PropTypes.number.isRequired,
     neighborhood: React.PropTypes.string.isRequired,
     day: React.PropTypes.string.isRequired,
-    time: React.PropTypes.string.isRequired
+    time: React.PropTypes.string.isRequired,
+    handleRecSubmit: React.PropTypes.func.isRequired
   },
 
   getInitialState () {
@@ -52,7 +53,7 @@ var Inspire = React.createClass({
     } else {
       var i = 0
       cands = this.state.candidates.map(e => {
-        return (<Candidate data={e} key={i++} neighborhood={this.props.neighborhood} day={this.props.day} time={this.props.time} />)
+        return (<Candidate data={e} key={i++} neighborhood={this.props.neighborhood} day={this.props.day} time={this.props.time} handleRecSubmit={this.props.handleRecSubmit} />)
       })
     }
 
