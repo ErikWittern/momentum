@@ -9,15 +9,23 @@
 </head>
 <body>
 
-  <% if user_signed_in? %>
-        <p><%= current_user.email %></p>
-    <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-  <% end %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+        <% if user_signed_in? %>
+          <p>
+            <%= current_user.email %>
+            <span class="pull-right"><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></span>
+          </p>
+        <% end %>
+      </div>
+    </div>
 
-  <!-- <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p> -->
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
 
-<%= yield %>
+      <%= yield %>
+  </div>
 
 </body>
 </html>

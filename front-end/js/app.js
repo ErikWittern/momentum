@@ -136,20 +136,18 @@ var MomentumApp = React.createClass({
     }
 
     return (
-      <Grid fluid>
-        <Row>
-          <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
-            <Image src='/logo_small.png' />
+      <Row>
+        <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
+          <Image src='/logo_small.png' />
 
-            <Navigation
-              neighborhood={this.state.neighborhood}
-              currentView={this.state.currentView}
-              handleNav={this.handleNav} />
+          <Navigation
+            neighborhood={this.state.neighborhood}
+            currentView={this.state.currentView}
+            handleNav={this.handleNav} />
 
-            {page}
-          </div>
-        </Row>
-      </Grid>
+          {page}
+        </div>
+      </Row>
     )
   }
 })
