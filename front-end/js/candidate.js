@@ -46,8 +46,9 @@ var Candidate = React.createClass({
           console.log(err)
           return
         }
+        console.log(res.body)
         this.props.handleRecSubmit()
-      })
+      }.bind(this))
     // TODO: make call to post location...
   },
 
