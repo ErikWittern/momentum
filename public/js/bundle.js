@@ -155,7 +155,9 @@
 	    var page;
 	    switch (this.state.currentView) {
 	      case 'welcome':
-	        page = _react2.default.createElement(_welcome.Welcome, { onIntentionSelection: this.handleWelcomeSelection });
+	        page = _react2.default.createElement(_welcome.Welcome, {
+	          onIntentionSelection: this.handleWelcomeSelection,
+	          neighborhood: this.state.neighborhood });
 	        break;
 	      case 'inspiration':
 	        page = _react2.default.createElement(_inspiration.Inspiration, {
@@ -167,9 +169,6 @@
 	        break;
 	      case 'inspire':
 	        page = _react2.default.createElement(_inspire.Inspire, { lat: this.state.lat, lng: this.state.lng, neighborhood: this.state.neighborhood });
-	        break;
-	      default:
-	        page = _react2.default.createElement(_inspiration.Inspiration, null);
 	        break;
 	    }
 	
@@ -41104,11 +41103,21 @@
 	var Welcome = _react2.default.createClass({
 	  displayName: 'Welcome',
 	
+	  propTypes: {
+	    neighborhood: _react2.default.PropTypes.string.isRequired
+	  },
+	
 	  handleClick: function handleClick(intention) {
 	    this.props.onIntentionSelection(intention);
 	  },
 	  render: function render() {
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'eat', onClick: this.handleClick.bind(null, 'eat') }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'drink', onClick: this.handleClick.bind(null, 'drink') }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'explore', onClick: this.handleClick.bind(null, 'explore') }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'party', onClick: this.handleClick.bind(null, 'party') }, 'party')));
+	    var content;
+	    if (this.props.neighborhood) {
+	      content = _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'eat', onClick: this.handleClick.bind(null, 'eat') }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'drink', onClick: this.handleClick.bind(null, 'drink') }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'explore', onClick: this.handleClick.bind(null, 'explore') }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'party', onClick: this.handleClick.bind(null, 'party') }, 'party'));
+	    } else {
+	      content = _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-link momentum-deactive' }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-deactive' }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-deactive' }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-deactive' }, 'party'));
+	    }
+	    return _react2.default.createElement('div', null, content);
 	  }
 	});
 	

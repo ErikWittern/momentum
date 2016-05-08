@@ -24,6 +24,7 @@
 
 .momentum-deactive {
   color: gray;
+  cursor: not-allowed;
 }
 
 .momentum-link {
