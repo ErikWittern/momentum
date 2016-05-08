@@ -1,0 +1,11 @@
+momentum-postgres:
+  image: registry.ng.bluemix.net/ci_prod/momentum-postgres:production
+
+momentum:
+  image: registry.ng.bluemix.net/ci_prod/momentum:production
+  environment:
+    PROXY_HOST: https://momentum-nyc.mybluemix.net
+  ports:
+    - "169.44.15.78:80:80"
+  links:
+    - momentum-postgres

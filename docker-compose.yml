@@ -1,0 +1,23 @@
+momentum-postgres:
+  container_name: momentum-postgres
+  image: momentum-postgres:production
+  volumes:
+    - momentum-postgres-data:/var/lib/postgresql/data
+  ports:
+    - "5432"
+
+momentum:
+  container_name: momentum
+  image: momentum:production
+  labels:
+    - "io.momentum.department=IBM Research"
+  environment:
+    GOOGLE_PLACES_API_KEY: ${GOOGLE_PLACES_API_KEY}
+    FACEBOOK_KEY: ${FACEBOOK_KEY}
+    FACEBOOK_SECRET: ${FACEBOOK_SECRET}
+    SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+    DATABASE_URL: postgresql://postgres@momentum-postgres
+  ports:
+    - "80:80"
+  links:
+    - momentum-postgres

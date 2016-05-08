@@ -4,6 +4,8 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Secrets
+.env
 
 # Ignore bundler config.
 /.bundle
@@ -16,6 +18,7 @@
 /log/*
 !/log/.keep
 /tmp
+.byebug_history
 
 # Logs
 logs
