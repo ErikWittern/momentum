@@ -3,11 +3,12 @@
 <head>
   <title>Momentum</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="/css/bootstrap.min.css" />
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<!--
   <% if user_signed_in? %>
     <li>
         <p><%= current_user.email %></p>
@@ -17,7 +18,7 @@
     <li>
     <%= link_to('Login', new_user_session_path)  %>
     </li>
-  <% end %>
+  <% end %> -->
 
 
   <p class="notice"><%= notice %></p>
