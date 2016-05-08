@@ -42,6 +42,11 @@ class RecommendationsController < ApplicationController
   def create
     @recommendation = Recommendation.new(recommendation_params)
 
+    # check if we have the Place
+    place = Place.find_or_create_by({name: params[:name], google_place_id: params[:google_place_id], neighborhood: params[:neighborhood]})
+    @recommendation.place = place
+    @recommendation.user = current_user
+
     respond_to do |format|
       if @recommendation.save
         format.html { redirect_to @recommendation, notice: 'Recommendation was successfully created.' }
@@ -85,6 +90,6 @@ class RecommendationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recommendation_params
-      params.require(:recommendation).permit(:category, :by_role, :user_id, :place_id, :google_place_id)
+      params.require(:recommendation).permit(:by_role, :user_id, :place_id, :google_place_id, :name, :intention, :neighborhood)
     end
 end

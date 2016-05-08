@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160507192624) do
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.string   "category"
+    t.string   "intention"
     t.string   "by_role"
     t.integer  "user_id"
     t.integer  "place_id"
