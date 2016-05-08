@@ -45,7 +45,7 @@ var PlaceList = React.createClass({
 
         return (
           <form className="placeForm" onSubmit={this.handleSubmit}>
-            <Place name={place.name} key={place.name} />
+            <Place name={place.name} key={place.name} lat={place.latitude} lng={place.longitude} />
             <input type="submit" value={this.getNextButtonText()} />
           </form>
         );
