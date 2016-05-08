@@ -6,7 +6,7 @@ import React from 'react'
 import { Welcome } from './welcome'
 import { Inspiration } from './inspiration'
 import { Inspire } from './inspire'
-import { Grid, Row, Image } from 'react-bootstrap'
+import { Row, Image } from 'react-bootstrap'
 import { Navigation } from './navigation'
 var request = require('superagent')
 
@@ -141,9 +141,18 @@ var MomentumApp = React.createClass({
     }
 
     return (
+      var msg
+      if (this.state.msg) {
+        msg = (<div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
+          <h4>{this.state.msg}</h4>
+        </div>)
+      }
+
       <Row>
         <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
           <Image src='/logo_small.png' />
+
+          {msg}
 
           <Navigation
             neighborhood={this.state.neighborhood}

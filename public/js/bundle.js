@@ -22185,17 +22185,6 @@
 	    // TODO: make call to post location...
 	  },
 	  render: function render() {
-	    // var voteUi
-	    // if (this.state.expanded) {
-	    //   voteUi = (
-	    //     <div className='momentum-vote-ui'>
-	    //       <h3 onClick={this.handleSubmit.bind(null, 'eat')} className='momentum-link momentum-eat momentum-space'>eat</h3>
-	    //       <h3 onClick={this.handleSubmit.bind(null, 'drink')} className='momentum-link momentum-drink momentum-space'>drink</h3>
-	    //       <h3 onClick={this.handleSubmit.bind(null, 'explore')} className='momentum-link momentum-explore momentum-space'>explore</h3>
-	    //       <h3 onClick={this.handleSubmit.bind(null, 'party')} className='momentum-link momentum-party momentum-space'>party</h3>
-	    //     </div>)
-	    // }
-	
 	    return _react2.default.createElement('div', { className: 'momentum-candidate' }, _react2.default.createElement('h3', { onClick: this.handleClick, className: 'momentum-link' }, this.props.data.name), _react2.default.createElement(_reactBootstrap.Collapse, { 'in': this.state.expanded }, _react2.default.createElement('div', { style: { margin: 0 + 'px', padding: 0 + 'px' } }, _react2.default.createElement('div', { className: 'momentum-vote-ui' }, _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'eat'), className: 'momentum-link momentum-eat momentum-space' }, 'eat'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'drink'), className: 'momentum-link momentum-drink momentum-space' }, 'drink'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'explore'), className: 'momentum-link momentum-explore momentum-space' }, 'explore'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'party'), className: 'momentum-link momentum-party momentum-space' }, 'party')))));
 	  }
 	});
