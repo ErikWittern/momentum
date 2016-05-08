@@ -16,7 +16,7 @@ class RecommendationsController < ApplicationController
   def days_since(date)
     date - Date.today
   end
-  
+
   # GET /recommendations
   # GET /recommendations.json
   def index
@@ -85,6 +85,6 @@ class RecommendationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recommendation_params
-      params.require(:recommendation).permit(:eat, :drink, :explore, :party, :by_role, :user_id, :place_id)
+      params.require(:recommendation).permit(:category, :by_role, :user_id, :place_id, :google_place_id)
     end
 end
