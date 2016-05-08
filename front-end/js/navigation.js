@@ -3,11 +3,9 @@ import React from 'react'
 var Navigation = React.createClass({
   handleClick (view) {
     this.props.handleNav(view)
-    console.log(view)
   },
 
   render () {
-    console.log(this.props.neighborhood)
     var get
     var give
     if (this.props.currentView === 'inspiration' ||
@@ -24,7 +22,7 @@ var Navigation = React.createClass({
     }
 
     return (
-      <div>
+      <div className='momentum-nav-container'>
         <h2>
           {get}
           {give}

@@ -123,7 +123,7 @@ var MomentumApp = React.createClass({
           status={this.state.status} />)
         break
       case 'inspire':
-        page = <Inspire lat={this.state.lat} lng={this.state.lng} />
+        page = <Inspire lat={this.state.lat} lng={this.state.lng} neighborhood={this.state.neighborhood} />
         break
       default:
         page = <Inspiration />
@@ -133,8 +133,8 @@ var MomentumApp = React.createClass({
     return (
       <Grid fluid>
         <Row>
-          <div className='col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
-            <h1>M</h1>
+          <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
+            <h1 className='momentum-logo'>M</h1>
 
             <Navigation
               neighborhood={this.state.neighborhood}

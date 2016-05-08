@@ -166,14 +166,14 @@
 	          status: this.state.status });
 	        break;
 	      case 'inspire':
-	        page = _react2.default.createElement(_inspire.Inspire, { lat: this.state.lat, lng: this.state.lng });
+	        page = _react2.default.createElement(_inspire.Inspire, { lat: this.state.lat, lng: this.state.lng, neighborhood: this.state.neighborhood });
 	        break;
 	      default:
 	        page = _react2.default.createElement(_inspiration.Inspiration, null);
 	        break;
 	    }
 	
-	    return _react2.default.createElement(_reactBootstrap.Grid, { fluid: true }, _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement('h1', null, 'M'), _react2.default.createElement(_navigation.Navigation, {
+	    return _react2.default.createElement(_reactBootstrap.Grid, { fluid: true }, _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement('h1', { className: 'momentum-logo' }, 'M'), _react2.default.createElement(_navigation.Navigation, {
 	      neighborhood: this.state.neighborhood,
 	      currentView: this.state.currentView,
 	      handleNav: this.handleNav }), page)));
@@ -20285,13 +20285,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _placeList = __webpack_require__(445);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Inspiration = _react2.default.createClass({
 	  displayName: 'Inspiration',
 	
 	  render: function render() {
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'As a ', _react2.default.createElement('span', { className: 'momentum-status' }, this.props.status, ' '), ', this ', _react2.default.createElement('span', { className: 'momentum-time' }, this.props.day, ' ', this.props.time, ' '), 'in ', _react2.default.createElement('span', { className: 'momentum-place' }, this.props.neighborhood, ' '), 'you should ', _react2.default.createElement('span', { className: 'momentum-intention' }, this.props.intention), '...'));
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'As a ', _react2.default.createElement('span', { className: 'momentum-status' }, this.props.status, ' '), 'in ', _react2.default.createElement('span', { className: 'momentum-place' }, this.props.neighborhood, ' '), 'this ', _react2.default.createElement('span', { className: 'momentum-time' }, this.props.day, ' ', this.props.time, ' '), 'you should ', _react2.default.createElement('span', { className: 'momentum-intention' }, this.props.intention)), _react2.default.createElement(_placeList.PlaceList, { data: this.props.neighborhood }));
 	  }
 	});
 	
@@ -20318,6 +20320,12 @@
 	
 	var Inspire = _react2.default.createClass({
 	  displayName: 'Inspire',
+	
+	  propTypes: {
+	    lat: _react2.default.PropTypes.number.isRequired,
+	    lng: _react2.default.PropTypes.number.isRequired,
+	    neighborhood: _react2.default.PropTypes.string.isRequired
+	  },
 	
 	  getInitialState: function getInitialState() {
 	    return {
@@ -20350,6 +20358,8 @@
 	    }.bind(this));
 	  },
 	  render: function render() {
+	    var _this = this;
+	
 	    var cands;
 	    if (!this.state.candidates) {
 	      cands = _react2.default.createElement('h1', null, 'Working on it...');
@@ -20358,7 +20368,7 @@
 	    } else {
 	      var i = 0;
 	      cands = this.state.candidates.map(function (e) {
-	        return _react2.default.createElement(_candidate.Candidate, { data: e, key: i++ });
+	        return _react2.default.createElement(_candidate.Candidate, { data: e, key: i++, neighborhood: _this.props.neighborhood });
 	      });
 	    }
 	
@@ -41119,12 +41129,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactBootstrap = __webpack_require__(171);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Candidate = _react2.default.createClass({
 	  displayName: 'Candidate',
+	
+	  propTypes: {
+	    data: _react2.default.PropTypes.object.isRequired,
+	    neighborhood: _react2.default.PropTypes.string.isRequired
+	  },
 	
 	  getInitialState: function getInitialState() {
 	    return {
@@ -41139,15 +41152,22 @@
 	    }
 	  },
 	  handleSubmit: function handleSubmit(intention) {
-	    console.log(intention);
+	    console.log(this.props.data);
+	    var data = {
+	      name: this.props.data.name,
+	      intention: intention,
+	      google_place_id: this.props.data.place_id
+	    };
+	    console.log(data);
+	    // TODO: make call to post location...
 	  },
 	  render: function render() {
 	    var voteUi;
 	    if (this.state.expanded) {
-	      voteUi = _react2.default.createElement('div', null, _react2.default.createElement(_reactBootstrap.Nav, { bsStyle: 'pills', activeKey: 1, onSelect: this.handleSubmit }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'eat' }, 'eat'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'dring' }, 'dring'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'explore' }, 'explore'), _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 'party' }, 'party')));
+	      voteUi = _react2.default.createElement('div', { className: 'momentum-vote-ui' }, _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'eat'), className: 'momentum-link momentum-space' }, 'eat'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'drink'), className: 'momentum-link momentum-space' }, 'drink'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'explore'), className: 'momentum-link momentum-space' }, 'explore'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'party'), className: 'momentum-link momentum-space' }, 'party'));
 	    }
 	
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h3', { onClick: this.handleClick }, this.props.data.name), voteUi);
+	    return _react2.default.createElement('div', { className: 'momentum-candidate' }, _react2.default.createElement('h3', { onClick: this.handleClick, className: 'momentum-link' }, this.props.data.name), voteUi);
 	  }
 	});
 	
@@ -41175,10 +41195,8 @@
 	
 	  handleClick: function handleClick(view) {
 	    this.props.handleNav(view);
-	    console.log(view);
 	  },
 	  render: function render() {
-	    console.log(this.props.neighborhood);
 	    var get;
 	    var give;
 	    if (this.props.currentView === 'inspiration' || this.props.currentView === 'welcome') {
@@ -41193,11 +41211,84 @@
 	      give = _react2.default.createElement('span', null, 'Give');
 	    }
 	
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, get, give));
+	    return _react2.default.createElement('div', { className: 'momentum-nav-container' }, _react2.default.createElement('h2', null, get, give));
 	  }
 	});
 	
 	exports.Navigation = Navigation;
+
+/***/ },
+/* 445 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PlaceList = undefined;
+	
+	var _react = __webpack_require__(162);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _place = __webpack_require__(446);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var request = __webpack_require__(436);
+	
+	var PlaceList = _react2.default.createClass({
+	  displayName: 'PlaceList',
+	
+	  getInitialState: function getInitialState() {
+	    return { data: [] };
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    request.get('/places.json').end(function (err, res) {
+	      if (err) return;
+	      console.log(res);
+	      this.setState({ data: res.body });
+	    }.bind(this));
+	  },
+	  render: function render() {
+	    var placeNodes = this.state.data.map(function (place) {
+	      return _react2.default.createElement(_place.Place, { name: place.name, key: place.name });
+	    });
+	    return _react2.default.createElement('div', { className: 'placeList' }, placeNodes);
+	  }
+	
+	});
+	
+	exports.PlaceList = PlaceList;
+
+/***/ },
+/* 446 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Place = undefined;
+	
+	var _react = __webpack_require__(162);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Place = _react2.default.createClass({
+	  displayName: "Place",
+	
+	  render: function render() {
+	    return _react2.default.createElement("div", { className: "place" }, _react2.default.createElement("h3", { className: "placeName" }, this.props.name));
+	  }
+	});
+	
+	exports.Place = Place;
 
 /***/ }
 /******/ ]);
