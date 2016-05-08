@@ -125,7 +125,12 @@ var MomentumApp = React.createClass({
           status={this.state.status} />)
         break
       case 'inspire':
-        page = <Inspire lat={this.state.lat} lng={this.state.lng} neighborhood={this.state.neighborhood} />
+        page = <Inspire
+          lat={this.state.lat}
+          lng={this.state.lng}
+          neighborhood={this.state.neighborhood}
+          day={this.state.day}
+          time={this.state.time} />
         break
     }
 

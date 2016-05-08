@@ -10,15 +10,15 @@ var Navigation = React.createClass({
     var give
     if (this.props.currentView === 'inspiration' ||
       this.props.currentView === 'welcome') {
-      get = (<span>Get </span>)
+      get = (<span className='momentum-space'>Get</span>)
       if (this.props.neighborhood) {
-        give = (<span className='momentum-link' onClick={this.handleClick.bind(null, 'inspire')}>Give</span>)
+        give = (<span className='momentum-link momentum-space' onClick={this.handleClick.bind(null, 'inspire')}>Give</span>)
       } else {
-        give = (<span className='momentum-deactive'>Give</span>)
+        give = (<span className='momentum-deactive momentum-space'>Give</span>)
       }
     } else {
-      get = (<span className='momentum-link' onClick={this.handleClick.bind(null, 'welcome')}>Get </span>)
-      give = (<span>Give</span>)
+      get = (<span className='momentum-link momentum-space' onClick={this.handleClick.bind(null, 'welcome')}>Get</span>)
+      give = (<span className='momentum-space'>Give</span>)
     }
 
     return (

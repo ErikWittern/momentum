@@ -1,13 +1,15 @@
-* {
+h1, h2, h3, h4, h5, h6, p {
   font-family: 'Lato', sans-serif;
+  font-weight: 300;
   color: #181313;
 }
 
-.momentum-logo {
-  font-size: 5rem;
+.momentum-welcome-container {
+  margin-top: 50px;
 }
 
 .momentum-candidate {
+  margin-top: 15px;
   margin-bottom: 15px;
 }
 
@@ -16,8 +18,8 @@
 }
 
 .momentum-vote-ui {
-  margin-top: 35px;
-  margin-bottom: 35px;
+  margin-top: 45px;
+  margin-bottom: 45px;
   text-align: center;
 }
 
@@ -51,6 +53,18 @@
   color: #db8605;
 }
 
-.momentum-intention {
+.momentum-eat {
+  color: #063f2c;
+}
+
+.momentum-drink {
   color: #0a694a;
+}
+
+.momentum-explore {
+  color: #539680;
+}
+
+.momentum-party {
+  color: #9dc3b6;
 }
