@@ -4,7 +4,12 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
+    # @places = Place.all
+    if params[:day] && params[:time] && params[:intention] && params[:neighborhood]
+      @places = Place.joins(:recommendations).where(neighborhood: params[:neighborhood], 'recommendations.day': params[:day], 'recommendations.time': params[:time], 'recommendations.intention': params[:intention] )
+    else
+      @places = Place.all
+    end
   end
 
   # GET /places/1
