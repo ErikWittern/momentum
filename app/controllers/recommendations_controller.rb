@@ -8,9 +8,16 @@ class RecommendationsController < ApplicationController
   # return the status (:novice, :regular, :local)
   def retrieve_status(recommendations)
     score = 0
+    smoothing_factor = 20
     recommendations.each do |recommendation|
       # score += recommendation.by_role * (1 / days_since(recommendation.created_at))
-      score += 1 * (1 / days_since(recommendation.created_at))
+
+      days_since_recommandation = days_since(recommendation.created_at)
+      # geometric decay based on time
+      # score += 1 * (1 / days_since_recommendation)
+
+      # smoother geometric decay based on time
+      score += 1 * (1 / smoothing_factor + days_since_recommendation)
     end
 
     case score
