@@ -58,7 +58,11 @@ class RecommendationsController < ApplicationController
     # check if we have the Place
     place = Place.find_or_create_by({name: recommendation_params[:name], google_place_id: recommendation_params[:google_place_id], neighborhood: recommendation_params[:neighborhood]})
     @recommendation.place = place
-    @recommendation.user = current_user
+    if recommendation_params[:user_id].present?
+      @recommendation.user_id = recommendation_params[:user_id]
+    else
+      @recommendation.user = current_user
+    end
 
     respond_to do |format|
       if @recommendation.save

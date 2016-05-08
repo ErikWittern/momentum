@@ -18,8 +18,8 @@
       <tr>
         <td><%= recommendation.intention %></td>
         <td><%= recommendation.by_role %></td>
-        <td><%= recommendation.user %></td>
-        <td><%= recommendation.place %></td>
+        <td><%= recommendation.user.email %></td>
+        <td><%= recommendation.place.name %></td>
         <td><%= link_to 'Show', recommendation %></td>
         <td><%= link_to 'Edit', edit_recommendation_path(recommendation) %></td>
         <td><%= link_to 'Destroy', recommendation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

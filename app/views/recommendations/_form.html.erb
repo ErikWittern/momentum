@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.select :user_id, User.all.collect {|u| [ u.email, u.id ] } %>
   </div>
   <div class="field">
     <%= f.label :place_id %><br>
