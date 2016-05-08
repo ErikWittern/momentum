@@ -52,7 +52,7 @@ var Inspire = React.createClass({
     } else {
       var i = 0
       cands = this.state.candidates.map(e => {
-        return (<Candidate data={e} key={i++} neighborhood={this.props.neighborhood} />)
+        return (<Candidate data={e} key={i++} neighborhood={this.props.neighborhood} day={this.props.day} time={this.props.time} />)
       })
     }
 

@@ -99,10 +99,11 @@ var MomentumApp = React.createClass({
       'Saturday'
     ]
     var time = [
-      'night', 'night', 'night', 'night', 'night', // until 5 am
-      'morning', 'morning', 'morning', 'morning', 'morning', 'morning', 'morning', // until noon
-      'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', // until 6
-      'evening', 'evening', 'evening', 'evening', 'evening', 'evening'
+      'night', 'night', 'night', 'night', 'night', // 12 am - 5 am
+      'morning', 'morning', 'morning', 'morning', 'morning', 'morning', 'morning', // 5 am - 12 pm
+      'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', // 12 pm - 6 pm
+      'evening', 'evening', 'evening', 'evening', // 6 pm - 10 pm
+      'night', 'night' // 10 pm - 12 am
     ]
     this.setState({day: weekday[d.getDay()]})
     this.setState({time: time[d.getHours()]})

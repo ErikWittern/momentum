@@ -1,26 +1,26 @@
 import React from 'react'
 
 var PlaceMap = React.createClass({
-  componentDidMount: function() {
-    var latLng = {lat: this.props.lat, lng: this.props.lng};
+  componentDidMount: function () {
+    var latLng = {lat: this.props.lat, lng: this.props.lng}
 
-     var map = new google.maps.Map(document.getElementById('map'), {
-       zoom: 16,
-       center: latLng
-     });
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 16,
+      center: latLng
+    })
 
-     var marker = new google.maps.Marker({
-       position: latLng,
-       map: map,
-       title: this.props.name
-     });
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: this.props.name
+    })
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div id="map"> </div>
-    );
+      <div id='map'></div>
+    )
   }
-});
+})
 
 export {PlaceMap}

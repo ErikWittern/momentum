@@ -4,7 +4,9 @@ var request = require('superagent')
 var Candidate = React.createClass({
   propTypes: {
     data: React.PropTypes.object.isRequired,
-    neighborhood: React.PropTypes.string.isRequired
+    neighborhood: React.PropTypes.string.isRequired,
+    day: React.PropTypes.string.isRequired,
+    time: React.PropTypes.string.isRequired
   },
 
   getInitialState () {
@@ -28,7 +30,9 @@ var Candidate = React.createClass({
         name: this.props.data.name,
         intention: intention,
         google_place_id: this.props.data.place_id,
-        neighborhood: this.props.neighborhood
+        neighborhood: this.props.neighborhood,
+        day: this.props.day,
+        time: this.props.time
       }
     }
     console.log(data)

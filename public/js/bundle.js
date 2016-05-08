@@ -144,10 +144,12 @@
 	  getDayAndTime: function getDayAndTime() {
 	    var d = new Date();
 	    var weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-	    var time = ['night', 'night', 'night', 'night', 'night', // until 5 am
-	    'morning', 'morning', 'morning', 'morning', 'morning', 'morning', 'morning', // until noon
-	    'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', // until 6
-	    'evening', 'evening', 'evening', 'evening', 'evening', 'evening'];
+	    var time = ['night', 'night', 'night', 'night', 'night', // 12 am - 5 am
+	    'morning', 'morning', 'morning', 'morning', 'morning', 'morning', 'morning', // 5 am - 12 pm
+	    'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', // 12 pm - 6 pm
+	    'evening', 'evening', 'evening', 'evening', // 6 pm - 10 pm
+	    'night', 'night' // 10 pm - 12 am
+	    ];
 	    this.setState({ day: weekday[d.getDay()] });
 	    this.setState({ time: time[d.getHours()] });
 	  },
@@ -20389,7 +20391,7 @@
 	    } else {
 	      var i = 0;
 	      cands = this.state.candidates.map(function (e) {
-	        return _react2.default.createElement(_candidate.Candidate, { data: e, key: i++, neighborhood: _this.props.neighborhood });
+	        return _react2.default.createElement(_candidate.Candidate, { data: e, key: i++, neighborhood: _this.props.neighborhood, day: _this.props.day, time: _this.props.time });
 	      });
 	    }
 	
@@ -41169,7 +41171,9 @@
 	
 	  propTypes: {
 	    data: _react2.default.PropTypes.object.isRequired,
-	    neighborhood: _react2.default.PropTypes.string.isRequired
+	    neighborhood: _react2.default.PropTypes.string.isRequired,
+	    day: _react2.default.PropTypes.string.isRequired,
+	    time: _react2.default.PropTypes.string.isRequired
 	  },
 	
 	  getInitialState: function getInitialState() {
@@ -41191,7 +41195,9 @@
 	        name: this.props.data.name,
 	        intention: intention,
 	        google_place_id: this.props.data.place_id,
-	        neighborhood: this.props.neighborhood
+	        neighborhood: this.props.neighborhood,
+	        day: this.props.day,
+	        time: this.props.time
 	      }
 	    };
 	    console.log(data);
@@ -41318,7 +41324,7 @@
 	    var place = this.state.data[this.state.currentRecommendation];
 	    if (place == undefined) return null;
 	
-	    return _react2.default.createElement('form', { className: 'placeForm', onSubmit: this.handleSubmit }, _react2.default.createElement(_place.Place, { name: place.name, key: place.name, lat: place.latitude, lng: place.longitude }), _react2.default.createElement('input', { type: 'submit', value: this.getNextButtonText() }));
+	    return _react2.default.createElement('div', null, _react2.default.createElement(_place.Place, { name: place.name, google_place_id: place.google_place_id, key: place.name, lat: place.latitude, lng: place.longitude }), _react2.default.createElement('a', { className: 'momentum-link', onClick: this.handleSubmit }, this.getNextButtonText()));
 	  },
 	
 	  getNextButtonText: function getNextButtonText() {
@@ -41335,7 +41341,7 @@
 /* 446 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -41346,17 +41352,61 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _placeMap = __webpack_require__(447);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Place = _react2.default.createClass({
-	  displayName: "Place",
+	  displayName: 'Place',
 	
 	  render: function render() {
-	    return _react2.default.createElement("div", { className: "place" }, _react2.default.createElement("h3", { className: "placeName" }, this.props.name));
+	    return _react2.default.createElement('div', { className: 'place' }, _react2.default.createElement('h3', { className: 'placeName' }, this.props.name), _react2.default.createElement(_placeMap.PlaceMap, { name: this.props.name, lat: this.props.lat, lng: this.props.lng, google_place_id: this.props.google_place_id }));
 	  }
 	});
 	
 	exports.Place = Place;
+
+/***/ },
+/* 447 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PlaceMap = undefined;
+	
+	var _react = __webpack_require__(162);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var PlaceMap = _react2.default.createClass({
+	  displayName: 'PlaceMap',
+	
+	  componentDidMount: function componentDidMount() {
+	    var latLng = { lat: this.props.lat, lng: this.props.lng };
+	
+	    var map = new google.maps.Map(document.getElementById('map'), {
+	      zoom: 16,
+	      center: latLng
+	    });
+	
+	    var marker = new google.maps.Marker({
+	      position: latLng,
+	      map: map,
+	      title: this.props.name
+	    });
+	  },
+	
+	  render: function render() {
+	    return _react2.default.createElement('div', { id: 'map' });
+	  }
+	});
+	
+	exports.PlaceMap = PlaceMap;
 
 /***/ }
 /******/ ]);
