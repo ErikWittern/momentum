@@ -41,7 +41,7 @@ var Candidate = React.createClass({
       .post('/recommendations')
       .send(data)
       .set('Content-Type', 'application/json')
-      .set('Accepts', 'application/json')
+      .set('Accept', 'application/json')
       .end(function (err, res) {
         console.log(err, res)
       })
