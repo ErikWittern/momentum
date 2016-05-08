@@ -44,10 +44,10 @@ var PlaceList = React.createClass({
         if(place == undefined) return null
 
         return (
-          <form className="placeForm" onSubmit={this.handleSubmit}>
-            <Place name={place.name} key={place.name} lat={place.latitude} lng={place.longitude} />
-            <input type="submit" value={this.getNextButtonText()} />
-          </form>
+          <div>
+            <Place name={place.name} google_place_id={place.google_place_id} key={place.name} lat={place.latitude} lng={place.longitude} />
+            <a className="momentum-link" onClick={this.handleSubmit}>{this.getNextButtonText()}</a>
+          </div>
         );
     },
 
