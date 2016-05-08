@@ -5,7 +5,9 @@ var Inspire = React.createClass({
   propTypes: {
     lat: React.PropTypes.number.isRequired,
     lng: React.PropTypes.number.isRequired,
-    neighborhood: React.PropTypes.string.isRequired
+    neighborhood: React.PropTypes.string.isRequired,
+    day: React.PropTypes.string.isRequired,
+    time: React.PropTypes.string.isRequired
   },
 
   getInitialState () {
@@ -56,7 +58,7 @@ var Inspire = React.createClass({
 
     return (
       <div>
-        <h2>I want to give Momentum to...</h2>
+        <h2>This <span className='momentum-time'>{this.props.day} {this.props.time}</span> in <span className='momentum-place'>{this.props.neighborhood}</span>, I want to give Momentum to...</h2>
         {cands}
       </div>
     )
