@@ -109,7 +109,7 @@ var MomentumApp = React.createClass({
     this.setState({time: time[d.getHours()]})
   },
 
-  handleRecSubmit () {
+  handleRecSubmit (name) {
     this.setState({currentView: 'welcome'})
   },
 
