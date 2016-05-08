@@ -183,10 +183,19 @@
 	        break;
 	    }
 	
-	    return _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement(_reactBootstrap.Image, { src: '/logo_small.png' }), _react2.default.createElement(_navigation.Navigation, {
-	      neighborhood: this.state.neighborhood,
-	      currentView: this.state.currentView,
-	      handleNav: this.handleNav }), page));
+	    return(
+	      // var msg
+	      // if (this.state.msg) {
+	      //   msg = (<div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
+	      //     <h4>{this.state.msg}</h4>
+	      //   </div>)
+	      // }
+	
+	      _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement(_reactBootstrap.Image, { src: '/logo_small.png' }), _react2.default.createElement(_navigation.Navigation, {
+	        neighborhood: this.state.neighborhood,
+	        currentView: this.state.currentView,
+	        handleNav: this.handleNav }), page))
+	    );
 	  }
 	});
 	
@@ -20342,6 +20351,12 @@
 	var Inspiration = _react2.default.createClass({
 	  displayName: 'Inspiration',
 	
+	  propTypes: {
+	    neighborhood: _react2.default.PropTypes.string.isRequired,
+	    day: _react2.default.PropTypes.string.isRequired,
+	    time: _react2.default.PropTypes.string.isRequired
+	  },
+	
 	  render: function render() {
 	    var intention;
 	    switch (this.props.intention) {
@@ -20358,7 +20373,7 @@
 	        intention = _react2.default.createElement('span', { className: 'momentum-party' }, this.props.intention);
 	        break;
 	    }
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'As a ', _react2.default.createElement('span', { className: 'momentum-status' }, this.props.status, ' '), 'in ', _react2.default.createElement('span', { className: 'momentum-place' }, this.props.neighborhood), ', this ', _react2.default.createElement('span', { className: 'momentum-time' }, this.props.day, ' ', this.props.time, ' '), 'you should ', intention, ' at'), _react2.default.createElement(_placeList.PlaceList, { data: this.props.neighborhood }));
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'As a ', _react2.default.createElement('span', { className: 'momentum-status' }, this.props.status, ' '), 'in ', _react2.default.createElement('span', { className: 'momentum-place' }, this.props.neighborhood), ', this ', _react2.default.createElement('span', { className: 'momentum-time' }, this.props.day, ' ', this.props.time, ' '), 'you should ', intention, ' at'), _react2.default.createElement(_placeList.PlaceList, { neighborhood: this.props.neighborhood, day: this.props.day, time: this.props.time, intention: this.props.intention }));
 	  }
 	});
 	
@@ -20390,15 +20405,22 @@
 	var PlaceList = _react2.default.createClass({
 	  displayName: 'PlaceList',
 	
+	  propTypes: {
+	    neighborhood: _react2.default.PropTypes.string.isRequired,
+	    day: _react2.default.PropTypes.string.isRequired,
+	    time: _react2.default.PropTypes.string.isRequired,
+	    intention: _react2.default.PropTypes.string.isRequired
+	  },
+	
 	  getInitialState: function getInitialState() {
 	    return {
-	      data: [],
+	      data: null,
 	      currentRecommendation: 0
 	    };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
-	    request.get('/places.json').end(function (err, res) {
+	    request.get('/places.json?day=' + this.props.day + '&time=' + this.props.time + '&intention=' + this.props.intention + '&neighborhood=' + this.props.neighborhood).end(function (err, res) {
 	      if (err) return;
 	      console.log(res.body);
 	      this.setState({ data: res.body });
@@ -20421,6 +20443,12 @@
 	  },
 	
 	  render: function render() {
+	    if (this.state.data === null) {
+	      return _react2.default.createElement('h1', null, 'Working on it...');
+	    } else if (this.state.data !== null && this.state.data.length === 0) {
+	      return _react2.default.createElement('h1', null, 'No recommendations yet...');
+	    }
+	
 	    var place = this.state.data[this.state.currentRecommendation];
 	    if (!place || (typeof place === 'undefined' ? 'undefined' : _typeof(place)) === undefined) return null;
 	    console.log(place);
