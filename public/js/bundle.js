@@ -41162,6 +41162,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var request = __webpack_require__(436);
+	
 	var Candidate = _react2.default.createClass({
 	  displayName: 'Candidate',
 	
@@ -41185,12 +41187,18 @@
 	  handleSubmit: function handleSubmit(intention) {
 	    console.log(this.props.data);
 	    var data = {
-	      name: this.props.data.name,
-	      intention: intention,
-	      google_place_id: this.props.data.place_id,
-	      neighborhood: this.props.neighborhood
+	      recommendation: {
+	        name: this.props.data.name,
+	        intention: intention,
+	        google_place_id: this.props.data.place_id,
+	        neighborhood: this.props.neighborhood
+	      }
 	    };
 	    console.log(data);
+	
+	    request.post('/recommendations').send(data).set('Content-Type', 'application/json').end(function (err, res) {
+	      console.log(err, res);
+	    });
 	    // TODO: make call to post location...
 	  },
 	  render: function render() {
