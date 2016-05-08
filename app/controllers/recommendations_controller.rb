@@ -34,11 +34,11 @@ class RecommendationsController < ApplicationController
   # GET /recommendations
   # GET /recommendations.json
   def index
-    # @recommendations = Recommendation.all
-    # day / time / neighborhood
-    # byebug
-    @recommendations = Recommendation.joins(:place).where(day: params[:day], time: params[:time], 'places.neighborhood' => params[:neighborhood] )
-    # @recommendations = Recommendation.joins(:place).where('day = ? AND time = ? AND place.neighborhood = ?', params[:day], params[:time], params[:neighborhood] )
+    if params[:day] && params[:time] && params[:neighborhood]
+      @recommendations = Recommendation.joins(:place).where(day: params[:day], time: params[:time], 'places.neighborhood' => params[:neighborhood] )
+    else
+      @recommendations = Recommendation.all
+    end
   end
 
   # GET /recommendations/1
