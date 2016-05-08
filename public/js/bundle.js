@@ -87,7 +87,9 @@
 	      day: null,
 	      time: null,
 	      intention: null,
-	      status: 'novice'
+	      status: 'novice',
+	      msg: null,
+	      hasMsg: false
 	    };
 	  },
 	  handleWelcomeSelection: function handleWelcomeSelection(intention) {
@@ -154,7 +156,13 @@
 	    this.setState({ time: time[d.getHours()] });
 	  },
 	  handleRecSubmit: function handleRecSubmit(name) {
+	    var self = this;
 	    this.setState({ currentView: 'welcome' });
+	    this.setState({ msg: name + ' just gained Momentum thanks to you!', hasMsg: true }, function () {
+	      setTimeout(function () {
+	        self.setState({ msg: null, hasMsg: false });
+	      }, 5000);
+	    });
 	  },
 	  render: function render() {
 	    var page;
@@ -183,19 +191,17 @@
 	        break;
 	    }
 	
-	    return(
-	      // var msg
-	      // if (this.state.msg) {
-	      //   msg = (<div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
-	      //     <h4>{this.state.msg}</h4>
-	      //   </div>)
-	      // }
+	    // var msg
+	    // if (this.state.msg) {
+	    //   msg = (<div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 momentum-msg'>
+	    //     <h4>{this.state.msg}</h4>
+	    //   </div>)
+	    // }
 	
-	      _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement(_reactBootstrap.Image, { src: '/logo_small.png' }), _react2.default.createElement(_navigation.Navigation, {
-	        neighborhood: this.state.neighborhood,
-	        currentView: this.state.currentView,
-	        handleNav: this.handleNav }), page))
-	    );
+	    return _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement(_reactBootstrap.Collapse, { 'in': this.state.hasMsg }, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 momentum-msg' }, _react2.default.createElement('h4', null, this.state.msg))), _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement(_reactBootstrap.Image, { src: '/logo_small.png' }), _react2.default.createElement(_navigation.Navigation, {
+	      neighborhood: this.state.neighborhood,
+	      currentView: this.state.currentView,
+	      handleNav: this.handleNav }), page));
 	  }
 	});
 	
@@ -22208,7 +22214,7 @@
 	        return;
 	      }
 	      console.log(res.body);
-	      this.props.handleRecSubmit();
+	      this.props.handleRecSubmit(this.props.data.name);
 	    }.bind(this));
 	    // TODO: make call to post location...
 	  },

@@ -6,7 +6,7 @@ import React from 'react'
 import { Welcome } from './welcome'
 import { Inspiration } from './inspiration'
 import { Inspire } from './inspire'
-import { Row, Image } from 'react-bootstrap'
+import { Row, Image, Collapse } from 'react-bootstrap'
 import { Navigation } from './navigation'
 var request = require('superagent')
 
@@ -24,7 +24,9 @@ var MomentumApp = React.createClass({
       day: null,
       time: null,
       intention: null,
-      status: 'novice'
+      status: 'novice',
+      msg: null,
+      hasMsg: false
     }
   },
 
@@ -110,7 +112,13 @@ var MomentumApp = React.createClass({
   },
 
   handleRecSubmit (name) {
+    var self = this
     this.setState({currentView: 'welcome'})
+    this.setState({msg: name + ' just gained Momentum thanks to you!', hasMsg: true}, function () {
+      setTimeout(function () {
+        self.setState({msg: null, hasMsg: false})
+      }, 5000)
+    })
   },
 
   render () {
@@ -140,15 +148,20 @@ var MomentumApp = React.createClass({
         break
     }
 
-    return (
-      // var msg
-      // if (this.state.msg) {
-      //   msg = (<div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
-      //     <h4>{this.state.msg}</h4>
-      //   </div>)
-      // }
+    // var msg
+    // if (this.state.msg) {
+    //   msg = (<div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 momentum-msg'>
+    //     <h4>{this.state.msg}</h4>
+    //   </div>)
+    // }
 
+    return (
       <Row>
+        <Collapse in={this.state.hasMsg}>
+          <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 momentum-msg'>
+            <h4>{this.state.msg}</h4>
+          </div>
+        </Collapse>
         <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
           <Image src='/logo_small.png' />
           <Navigation

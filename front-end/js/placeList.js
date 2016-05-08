@@ -46,7 +46,7 @@ var PlaceList = React.createClass({
   render: function () {
     if (this.state.data === null) {
       return (<h1>Working on it...</h1>)
-    } else  if (this.state.data !== null && this.state.data.length === 0) {
+    } else if (this.state.data !== null && this.state.data.length === 0) {
       return (<h1>No recommendations yet...</h1>)
     }
 
