@@ -13,19 +13,19 @@
 
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.check_box :category %>
+    <%= f.select :category, Recommendation::CATEGORIES %>
   </div>
   <div class="field">
     <%= f.label :by_role %><br>
-    <%= f.text_field :by_role %>
+    <%= f.select :by_role, Recommendation::BY_ROLES %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
   </div>
   <div class="field">
     <%= f.label :place_id %><br>
-    <%= f.text_field :place_id %>
+    <%= f.select :place_id, Place.all.collect {|p| [ p.name, p.id ] }, { include_blank: true } %>
   </div>
   <div class="actions">
     <%= f.submit %>
