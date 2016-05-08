@@ -2,6 +2,12 @@ import React from 'react'
 import { Candidate } from './candidate'
 
 var Inspire = React.createClass({
+  propTypes: {
+    lat: React.PropTypes.number.isRequired,
+    lng: React.PropTypes.number.isRequired,
+    neighborhood: React.PropTypes.string.isRequired
+  },
+
   getInitialState () {
     return {
       candidates: null
@@ -44,7 +50,7 @@ var Inspire = React.createClass({
     } else {
       var i = 0
       cands = this.state.candidates.map(e => {
-        return (<Candidate data={e} key={i++} />)
+        return (<Candidate data={e} key={i++} neighborhood={this.props.neighborhood} />)
       })
     }
 

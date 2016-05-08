@@ -6,7 +6,7 @@ import React from 'react'
 import { Welcome } from './welcome'
 import { Inspiration } from './inspiration'
 import { Inspire } from './inspire'
-import { Grid, Row, Col, Nav, NavItem } from 'react-bootstrap'
+import { Grid, Row } from 'react-bootstrap'
 import { Navigation } from './navigation'
 var request = require('superagent')
 
@@ -112,7 +112,9 @@ var MomentumApp = React.createClass({
     var page
     switch (this.state.currentView) {
       case 'welcome':
-        page = <Welcome onIntentionSelection={this.handleWelcomeSelection} />
+        page = <Welcome
+          onIntentionSelection={this.handleWelcomeSelection}
+          neighborhood={this.state.neighborhood} />
         break
       case 'inspiration':
         page = (<Inspiration
@@ -123,18 +125,15 @@ var MomentumApp = React.createClass({
           status={this.state.status} />)
         break
       case 'inspire':
-        page = <Inspire lat={this.state.lat} lng={this.state.lng} />
-        break
-      default:
-        page = <Inspiration />
+        page = <Inspire lat={this.state.lat} lng={this.state.lng} neighborhood={this.state.neighborhood} />
         break
     }
 
     return (
       <Grid fluid>
         <Row>
-          <div className='col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
-            <h1>M</h1>
+          <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
+            <h1 className='momentum-logo'>M</h1>
 
             <Navigation
               neighborhood={this.state.neighborhood}
