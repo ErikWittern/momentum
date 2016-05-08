@@ -43,7 +43,7 @@ class RecommendationsController < ApplicationController
     @recommendation = Recommendation.new(recommendation_params)
 
     # check if we have the Place
-    place = Place.find_or_create_by({name: params[:name], google_place_id: params[:google_place_id], neighborhood: params[:neighborhood]})
+    place = Place.find_or_create_by({name: recommendation_params[:name], google_place_id: recommendation_params[:google_place_id], neighborhood: recommendation_params[:neighborhood]})
     @recommendation.place = place
     @recommendation.user = current_user
 
