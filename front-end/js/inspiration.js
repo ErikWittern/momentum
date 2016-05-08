@@ -2,6 +2,12 @@ import React from 'react'
 import { PlaceList } from './placeList'
 
 var Inspiration = React.createClass({
+  propTypes: {
+    neighborhood: React.PropTypes.string.isRequired,
+    day: React.PropTypes.string.isRequired,
+    time: React.PropTypes.string.isRequired
+  },
+
   render () {
     var intention
     switch (this.props.intention) {
@@ -28,7 +34,7 @@ var Inspiration = React.createClass({
           you should {intention} at
         </h2>
 
-        <PlaceList data={this.props.neighborhood} />
+        <PlaceList neighborhood={this.props.neighborhood} day={this.props.day} time={this.props.time} intention={this.props.intention} />
       </div>
     )
   }

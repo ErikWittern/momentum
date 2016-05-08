@@ -9,6 +9,13 @@ h1, h2, h3, h4, h5, h6, p {
   text-align: center;
 }
 
+.momentum-msg {
+  background-color: #ddff99;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 #map {
   width: 350px;
   height: 150px;
