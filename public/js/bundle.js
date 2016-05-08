@@ -20402,7 +20402,15 @@
 	  handleSubmit: function handleSubmit(e) {
 	    e.preventDefault();
 	
+<<<<<<< HEAD
 	    var currentRecommendation = this.state.currentRecommendation;
+=======
+	    var request = {
+	      location: location,
+	      radius: '500',
+	      types: ['restaurants', 'point_of_interest', 'amusement_park', 'art_gallery', 'bakery', 'bar', 'book_store', 'bowling_alley', 'cafe', 'casino', 'clothing_store', 'department_store', 'establishment', 'food', 'furniture_store', 'jewelry_store', 'library', 'liquor_store', 'meal_takeaway', 'movie_theater', 'museum', 'night_club', 'park', 'restaurant', 'shoe_store', 'shopping_mall', 'spa', 'stadium', 'store', 'university', 'zoo']
+	    };
+>>>>>>> cb8dfe47a6ee80d957b2ee92ba563a53392ee0ec
 	
 	    var newRecommendation;
 	    if (currentRecommendation < this.state.data.length - 1) {
