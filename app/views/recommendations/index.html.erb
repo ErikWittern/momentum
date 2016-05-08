@@ -9,6 +9,8 @@
       <th>By role</th>
       <th>User</th>
       <th>Place</th>
+      <th>Time</th>
+      <th>Day</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +22,8 @@
         <td><%= recommendation.by_role %></td>
         <td><%= recommendation.user.email %></td>
         <td><%= recommendation.place.name %></td>
+        <td><%= recommendation.time %></td>
+        <td><%= recommendation.day %></td>
         <td><%= link_to 'Show', recommendation %></td>
         <td><%= link_to 'Edit', edit_recommendation_path(recommendation) %></td>
         <td><%= link_to 'Destroy', recommendation, method: :delete, data: { confirm: 'Are you sure?' } %></td>

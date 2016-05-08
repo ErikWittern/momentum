@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :place_id %><br>
-    <%= f.select :place_id, Place.all.collect {|p| [ p.name, p.id ] }, { include_blank: true } %>
+    <%= f.select :place_id, Place.all.collect {|p| [ p.name, p.id ] } %>
   </div>
   <div class="field">
     <%= f.label :time %><br>
