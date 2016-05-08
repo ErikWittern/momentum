@@ -172,7 +172,7 @@
 	        break;
 	    }
 	
-	    return _react2.default.createElement(_reactBootstrap.Grid, { fluid: true }, _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement('h1', { className: 'momentum-logo' }, 'M'), _react2.default.createElement(_navigation.Navigation, {
+	    return _react2.default.createElement(_reactBootstrap.Grid, { fluid: true }, _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement(_reactBootstrap.Image, { src: '/logo_small.png' }), _react2.default.createElement(_navigation.Navigation, {
 	      neighborhood: this.state.neighborhood,
 	      currentView: this.state.currentView,
 	      handleNav: this.handleNav }), page)));
@@ -41165,7 +41165,8 @@
 	    var data = {
 	      name: this.props.data.name,
 	      intention: intention,
-	      google_place_id: this.props.data.place_id
+	      google_place_id: this.props.data.place_id,
+	      neighborhood: this.props.neighborhood
 	    };
 	    console.log(data);
 	    // TODO: make call to post location...

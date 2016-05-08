@@ -27,10 +27,7 @@ ActiveRecord::Schema.define(version: 20160507192624) do
   end
 
   create_table "recommendations", force: :cascade do |t|
-    t.boolean  "eat"
-    t.boolean  "drink"
-    t.boolean  "explore"
-    t.boolean  "party"
+    t.string   "intention"
     t.string   "by_role"
     t.integer  "user_id"
     t.integer  "place_id"

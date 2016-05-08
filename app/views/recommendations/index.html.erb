@@ -5,10 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Eat</th>
-      <th>Drink</th>
-      <th>Explore</th>
-      <th>Party</th>
+      <th>Intention</th>
       <th>By role</th>
       <th>User</th>
       <th>Place</th>
@@ -19,10 +16,7 @@
   <tbody>
     <% @recommendations.each do |recommendation| %>
       <tr>
-        <td><%= recommendation.eat %></td>
-        <td><%= recommendation.drink %></td>
-        <td><%= recommendation.explore %></td>
-        <td><%= recommendation.party %></td>
+        <td><%= recommendation.intention %></td>
         <td><%= recommendation.by_role %></td>
         <td><%= recommendation.user %></td>
         <td><%= recommendation.place %></td>

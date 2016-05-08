@@ -58,9 +58,9 @@ places = Place.create(
 
 recommendations = Recommendation.create(
   [
-    { eat: true, drink: false, explore: false, party: false, user: users[0], place: places[0] },
-    { eat: true, drink: false, explore: false, party: false, user: users[1], place: places[0] },
-    { eat: true, drink: false, explore: false, party: false, user: users[2], place: places[0] },
-    { eat: true, drink: false, explore: false, party: false, user: users[3], place: places[0] },
+    { intention: 'eat', user: users[0], place: places[0] },
+    { intention: 'eat', user: users[1], place: places[0] },
+    { intention: 'eat', user: users[2], place: places[0] },
+    { intention: 'eat', user: users[3], place: places[0] },
   ]
 )
