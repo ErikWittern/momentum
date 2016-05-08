@@ -4,7 +4,7 @@ class Recommendation < ActiveRecord::Base
 
   BY_ROLES = %w(novice regular local)
   INTENTIONS = %w(eat drink party explore)
-  TIMES = %w(Morning Afternoon Evening Night)
+  TIMES = %w(morning afternoon evening night)
   DAYS = %w(Monday Tuesday Wednesday Thursday Friday Saturday Sunday)
 
   validates :intention, inclusion: { in: INTENTIONS }, presence: true
