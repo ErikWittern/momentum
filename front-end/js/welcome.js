@@ -2,7 +2,7 @@ import React from 'react'
 
 var Welcome = React.createClass({
   propTypes: {
-    neighborhood: React.PropTypes.string.isRequired
+    neighborhood: React.PropTypes.string
   },
 
   handleClick (intention) {
@@ -24,10 +24,10 @@ var Welcome = React.createClass({
       content = (
         <h2>
           Right now, I'd like
-          to <span className='momentum-link momentum-deactive'>eat</span>
-          , <span className='momentum-link momentum-deactive'>drink</span>
-          , <span className='momentum-link momentum-deactive'>explore</span>
-          , <span className='momentum-link momentum-deactive'>party</span>
+          to <span className='momentum-deactive'>eat</span>
+          , <span className='momentum-deactive'>drink</span>
+          , <span className='momentum-deactive'>explore</span>
+          , <span className='momentum-deactive'>party</span>
         </h2>)
     }
     return (<div>{content}</div>)

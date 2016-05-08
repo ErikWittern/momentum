@@ -41104,7 +41104,7 @@
 	  displayName: 'Welcome',
 	
 	  propTypes: {
-	    neighborhood: _react2.default.PropTypes.string.isRequired
+	    neighborhood: _react2.default.PropTypes.string
 	  },
 	
 	  handleClick: function handleClick(intention) {
@@ -41115,7 +41115,7 @@
 	    if (this.props.neighborhood) {
 	      content = _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'eat', onClick: this.handleClick.bind(null, 'eat') }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'drink', onClick: this.handleClick.bind(null, 'drink') }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'explore', onClick: this.handleClick.bind(null, 'explore') }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'party', onClick: this.handleClick.bind(null, 'party') }, 'party'));
 	    } else {
-	      content = _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-link momentum-deactive' }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-deactive' }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-deactive' }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-deactive' }, 'party'));
+	      content = _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'party'));
 	    }
 	    return _react2.default.createElement('div', null, content);
 	  }
