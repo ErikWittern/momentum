@@ -6,7 +6,8 @@ var Candidate = React.createClass({
     data: React.PropTypes.object.isRequired,
     neighborhood: React.PropTypes.string.isRequired,
     day: React.PropTypes.string.isRequired,
-    time: React.PropTypes.string.isRequired
+    time: React.PropTypes.string.isRequired,
+    handleRecSubmit: React.PropTypes.func.isRequired
   },
 
   getInitialState () {
@@ -24,7 +25,6 @@ var Candidate = React.createClass({
   },
 
   handleSubmit (intention) {
-    console.log(this.props.data)
     var data = {
       recommendation: {
         name: this.props.data.name,
@@ -35,7 +35,6 @@ var Candidate = React.createClass({
         time: this.props.time
       }
     }
-    console.log(data)
 
     request
       .post('/recommendations')
@@ -43,7 +42,11 @@ var Candidate = React.createClass({
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
       .end(function (err, res) {
-        console.log(err, res)
+        if (err) {
+          console.log(err)
+          return
+        }
+        this.props.handleRecSubmit()
       })
     // TODO: make call to post location...
   },

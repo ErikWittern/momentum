@@ -153,6 +153,9 @@
 	    this.setState({ day: weekday[d.getDay()] });
 	    this.setState({ time: time[d.getHours()] });
 	  },
+	  handleRecSubmit: function handleRecSubmit() {
+	    this.setState({ currentView: 'welcome' });
+	  },
 	  render: function render() {
 	    var page;
 	    switch (this.state.currentView) {
@@ -175,7 +178,8 @@
 	          lng: this.state.lng,
 	          neighborhood: this.state.neighborhood,
 	          day: this.state.day,
-	          time: this.state.time });
+	          time: this.state.time,
+	          handleRecSubmit: this.handleRecSubmit });
 	        break;
 	    }
 	
@@ -22058,7 +22062,8 @@
 	    lng: _react2.default.PropTypes.number.isRequired,
 	    neighborhood: _react2.default.PropTypes.string.isRequired,
 	    day: _react2.default.PropTypes.string.isRequired,
-	    time: _react2.default.PropTypes.string.isRequired
+	    time: _react2.default.PropTypes.string.isRequired,
+	    handleRecSubmit: _react2.default.PropTypes.func.isRequired
 	  },
 	
 	  getInitialState: function getInitialState() {
@@ -22102,7 +22107,7 @@
 	    } else {
 	      var i = 0;
 	      cands = this.state.candidates.map(function (e) {
-	        return _react2.default.createElement(_candidate.Candidate, { data: e, key: i++, neighborhood: _this.props.neighborhood, day: _this.props.day, time: _this.props.time });
+	        return _react2.default.createElement(_candidate.Candidate, { data: e, key: i++, neighborhood: _this.props.neighborhood, day: _this.props.day, time: _this.props.time, handleRecSubmit: _this.props.handleRecSubmit });
 	      });
 	    }
 	
@@ -22138,7 +22143,8 @@
 	    data: _react2.default.PropTypes.object.isRequired,
 	    neighborhood: _react2.default.PropTypes.string.isRequired,
 	    day: _react2.default.PropTypes.string.isRequired,
-	    time: _react2.default.PropTypes.string.isRequired
+	    time: _react2.default.PropTypes.string.isRequired,
+	    handleRecSubmit: _react2.default.PropTypes.func.isRequired
 	  },
 	
 	  getInitialState: function getInitialState() {
@@ -22154,7 +22160,6 @@
 	    }
 	  },
 	  handleSubmit: function handleSubmit(intention) {
-	    console.log(this.props.data);
 	    var data = {
 	      recommendation: {
 	        name: this.props.data.name,
@@ -22165,10 +22170,13 @@
 	        time: this.props.time
 	      }
 	    };
-	    console.log(data);
 	
 	    request.post('/recommendations').send(data).set('Content-Type', 'application/json').set('Accept', 'application/json').end(function (err, res) {
-	      console.log(err, res);
+	      if (err) {
+	        console.log(err);
+	        return;
+	      }
+	      this.props.handleRecSubmit();
 	    });
 	    // TODO: make call to post location...
 	  },
