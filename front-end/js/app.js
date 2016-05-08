@@ -6,7 +6,7 @@ import React from 'react'
 import { Welcome } from './welcome'
 import { Inspiration } from './inspiration'
 import { Inspire } from './inspire'
-import { Grid, Row } from 'react-bootstrap'
+import { Grid, Row, Image } from 'react-bootstrap'
 import { Navigation } from './navigation'
 var request = require('superagent')
 
@@ -133,7 +133,7 @@ var MomentumApp = React.createClass({
       <Grid fluid>
         <Row>
           <div className='col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4'>
-            <h1 className='momentum-logo'>M</h1>
+            <Image src='/logo_small.png' />
 
             <Navigation
               neighborhood={this.state.neighborhood}

@@ -1,3 +1,8 @@
+* {
+  font-family: 'Lato', sans-serif;
+  color: #181313;
+}
+
 .momentum-logo {
   font-size: 5rem;
 }
@@ -35,17 +40,17 @@
 }
 
 .momentum-status {
-  color: green;
+  color: #8c0210;
 }
 
 .momentum-place {
-  color: blue;
+  color: #BFE017;
 }
 
 .momentum-time {
-  color: red;
+  color: #db8605;
 }
 
 .momentum-intention {
-  color: yellow;
+  color: #0a694a;
 }

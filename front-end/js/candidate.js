@@ -25,7 +25,8 @@ var Candidate = React.createClass({
     var data = {
       name: this.props.data.name,
       intention: intention,
-      google_place_id: this.props.data.place_id
+      google_place_id: this.props.data.place_id,
+      neighborhood: this.props.neighborhood
     }
     console.log(data)
     // TODO: make call to post location...
