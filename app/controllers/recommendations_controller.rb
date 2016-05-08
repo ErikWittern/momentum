@@ -9,12 +9,22 @@ class RecommendationsController < ApplicationController
   def retrieve_status(recommendations)
     score = 0
     recommendations.each { |recommendation|
-      score += recommendation.by_role * (1 / days_since(recommendation.created_at))
+      # score += recommendation.by_role * (1 / days_since(recommendation.created_at))
+      score += 1 * (1 / days_since(recommendation.created_at))
     }
+
+    case score
+    when 0..10 then
+      'novice'
+    when 11..50 then
+      'regular'
+    else
+      'local'
+    end
   end
 
   def days_since(date)
-    date - Date.today
+    (date.to_date - Date.today.to_date).to_i
   end
 
   # GET /recommendations
@@ -40,7 +50,10 @@ class RecommendationsController < ApplicationController
   # POST /recommendations
   # POST /recommendations.json
   def create
-    @recommendation = Recommendation.new(recommendation_params)
+    @recommendation = Recommendation.new(recommendation_params.slice(:intention, :time, :day))
+
+    # only in the neighborhood
+    @recommendation.by_role = retrieve_status(current_user.recommendations)
 
     # check if we have the Place
     place = Place.find_or_create_by({name: recommendation_params[:name], google_place_id: recommendation_params[:google_place_id], neighborhood: recommendation_params[:neighborhood]})
@@ -90,6 +103,6 @@ class RecommendationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recommendation_params
-      params.require(:recommendation).permit(:by_role, :user_id, :place_id, :google_place_id, :name, :intention, :neighborhood)
+      params.require(:recommendation).permit(:by_role, :user_id, :place_id, :google_place_id, :name, :intention, :neighborhood, :time, :day)
     end
 end

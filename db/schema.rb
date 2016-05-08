@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507192624) do
+ActiveRecord::Schema.define(version: 20160508030834) do
 
   create_table "places", force: :cascade do |t|
     t.string   "name"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20160507192624) do
     t.integer  "place_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "time"
+    t.string   "day"
   end
 
   add_index "recommendations", ["place_id"], name: "index_recommendations_on_place_id"

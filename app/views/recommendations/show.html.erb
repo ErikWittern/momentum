@@ -20,5 +20,15 @@
   <%= @recommendation.place %>
 </p>
 
+<p>
+  <strong>Day:</strong>
+  <%= @recommendation.day %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @recommendation.time %>
+</p>
+
 <%= link_to 'Edit', edit_recommendation_path(@recommendation) %> |
 <%= link_to 'Back', recommendations_path %>

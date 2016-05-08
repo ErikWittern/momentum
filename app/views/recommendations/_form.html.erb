@@ -27,6 +27,14 @@
     <%= f.label :place_id %><br>
     <%= f.select :place_id, Place.all.collect {|p| [ p.name, p.id ] }, { include_blank: true } %>
   </div>
+  <div class="field">
+    <%= f.label :time %><br>
+    <%= f.select :time, Recommendation::TIMES %>
+  </div>
+  <div class="field">
+    <%= f.label :day %><br>
+    <%= f.select :day, Recommendation::DAYS %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
