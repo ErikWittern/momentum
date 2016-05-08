@@ -8,10 +8,10 @@ class RecommendationsController < ApplicationController
   # return the status (:novice, :regular, :local)
   def retrieve_status(recommendations)
     score = 0
-    recommendations.each { |recommendation|
+    recommendations.each do |recommendation|
       # score += recommendation.by_role * (1 / days_since(recommendation.created_at))
       score += 1 * (1 / days_since(recommendation.created_at))
-    }
+    end
 
     case score
     when 0..10 then
@@ -24,7 +24,11 @@ class RecommendationsController < ApplicationController
   end
 
   def days_since(date)
-    (date.to_date - Date.today.to_date).to_i
+    days = (date.to_date - Date.today.to_date).to_i
+    if days == 0
+      days = 1
+    end
+    days
   end
 
   # GET /recommendations
