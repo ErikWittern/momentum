@@ -64,8 +64,13 @@ class RecommendationsController < ApplicationController
     @recommendation.by_role = retrieve_status(current_user.recommendations)
 
     # check if we have the Place
-    place = Place.find_or_create_by({name: recommendation_params[:name], google_place_id: recommendation_params[:google_place_id], neighborhood: recommendation_params[:neighborhood]})
+    if recommendation_params[:place_id]
+      place = Place.find(recommendation_params[:place_id])
+    else
+      place = Place.find_or_create_by({name: recommendation_params[:name], google_place_id: recommendation_params[:google_place_id], neighborhood: recommendation_params[:neighborhood]})
+    end
     @recommendation.place = place
+
     if recommendation_params[:user_id].present?
       @recommendation.user_id = recommendation_params[:user_id]
     else
