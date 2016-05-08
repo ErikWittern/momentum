@@ -3,6 +3,8 @@
   color: #181313;
 }
 
+#map { width: 200px; height: 200px; }
+
 .momentum-logo {
   font-size: 5rem;
 }
