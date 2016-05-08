@@ -35,7 +35,7 @@ class RecommendationsController < ApplicationController
   # GET /recommendations.json
   def index
     if params[:day] && params[:time] && params[:neighborhood] && params[:intention]
-      @recommendations = Recommendation.joins(:place).where(day: params[:day], time: params[:time], params[:intention], 'places.neighborhood' => params[:neighborhood] )
+      @recommendations = Recommendation.joins(:place).where(day: params[:day], time: params[:time], intention: params[:intention], 'places.neighborhood' => params[:neighborhood] )
     else
       @recommendations = Recommendation.all
     end
