@@ -179,10 +179,10 @@
 	        break;
 	    }
 	
-	    return _react2.default.createElement(_reactBootstrap.Grid, { fluid: true }, _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement(_reactBootstrap.Image, { src: '/logo_small.png' }), _react2.default.createElement(_navigation.Navigation, {
+	    return _react2.default.createElement(_reactBootstrap.Row, null, _react2.default.createElement('div', { className: 'col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4' }, _react2.default.createElement(_reactBootstrap.Image, { src: '/logo_small.png' }), _react2.default.createElement(_navigation.Navigation, {
 	      neighborhood: this.state.neighborhood,
 	      currentView: this.state.currentView,
-	      handleNav: this.handleNav }), page)));
+	      handleNav: this.handleNav }), page));
 	  }
 	});
 	
