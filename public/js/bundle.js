@@ -168,7 +168,12 @@
 	          status: this.state.status });
 	        break;
 	      case 'inspire':
-	        page = _react2.default.createElement(_inspire.Inspire, { lat: this.state.lat, lng: this.state.lng, neighborhood: this.state.neighborhood });
+	        page = _react2.default.createElement(_inspire.Inspire, {
+	          lat: this.state.lat,
+	          lng: this.state.lng,
+	          neighborhood: this.state.neighborhood,
+	          day: this.state.day,
+	          time: this.state.time });
 	        break;
 	    }
 	
@@ -20292,7 +20297,22 @@
 	  displayName: 'Inspiration',
 	
 	  render: function render() {
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'As a ', _react2.default.createElement('span', { className: 'momentum-status' }, this.props.status, ' '), 'in ', _react2.default.createElement('span', { className: 'momentum-place' }, this.props.neighborhood, ' '), 'this ', _react2.default.createElement('span', { className: 'momentum-time' }, this.props.day, ' ', this.props.time, ' '), 'you should ', _react2.default.createElement('span', { className: 'momentum-intention' }, this.props.intention)), _react2.default.createElement(_placeList.PlaceList, { data: this.props.neighborhood }));
+	    var intention;
+	    switch (this.props.intention) {
+	      case 'eat':
+	        intention = _react2.default.createElement('span', { className: 'momentum-eat' }, this.props.intention);
+	        break;
+	      case 'drink':
+	        intention = _react2.default.createElement('span', { className: 'momentum-drink' }, this.props.intention);
+	        break;
+	      case 'explore':
+	        intention = _react2.default.createElement('span', { className: 'momentum-explore' }, this.props.intention);
+	        break;
+	      case 'party':
+	        intention = _react2.default.createElement('span', { className: 'momentum-party' }, this.props.intention);
+	        break;
+	    }
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'As a ', _react2.default.createElement('span', { className: 'momentum-status' }, this.props.status, ' '), 'in ', _react2.default.createElement('span', { className: 'momentum-place' }, this.props.neighborhood), ', this ', _react2.default.createElement('span', { className: 'momentum-time' }, this.props.day, ' ', this.props.time, ' '), 'you should ', intention, ' at'), _react2.default.createElement(_placeList.PlaceList, { data: this.props.neighborhood }));
 	  }
 	});
 	
@@ -20323,7 +20343,9 @@
 	  propTypes: {
 	    lat: _react2.default.PropTypes.number.isRequired,
 	    lng: _react2.default.PropTypes.number.isRequired,
-	    neighborhood: _react2.default.PropTypes.string.isRequired
+	    neighborhood: _react2.default.PropTypes.string.isRequired,
+	    day: _react2.default.PropTypes.string.isRequired,
+	    time: _react2.default.PropTypes.string.isRequired
 	  },
 	
 	  getInitialState: function getInitialState() {
@@ -20371,7 +20393,7 @@
 	      });
 	    }
 	
-	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'I want to give Momentum to...'), cands);
+	    return _react2.default.createElement('div', null, _react2.default.createElement('h2', null, 'This ', _react2.default.createElement('span', { className: 'momentum-time' }, this.props.day, ' ', this.props.time), ' in ', _react2.default.createElement('span', { className: 'momentum-place' }, this.props.neighborhood), ', I want to give Momentum to...'), cands);
 	  }
 	});
 	
@@ -41113,11 +41135,11 @@
 	  render: function render() {
 	    var content;
 	    if (this.props.neighborhood) {
-	      content = _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'eat', onClick: this.handleClick.bind(null, 'eat') }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'drink', onClick: this.handleClick.bind(null, 'drink') }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'explore', onClick: this.handleClick.bind(null, 'explore') }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-link', intention: 'party', onClick: this.handleClick.bind(null, 'party') }, 'party'));
+	      content = _react2.default.createElement('h2', null, 'Right now, I want to ', _react2.default.createElement('span', { className: 'momentum-link momentum-eat', intention: 'eat', onClick: this.handleClick.bind(null, 'eat') }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-drink', intention: 'drink', onClick: this.handleClick.bind(null, 'drink') }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-explore', intention: 'explore', onClick: this.handleClick.bind(null, 'explore') }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-link momentum-party', intention: 'party', onClick: this.handleClick.bind(null, 'party') }, 'party'));
 	    } else {
-	      content = _react2.default.createElement('h2', null, 'Right now, I\'d like to ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'party'));
+	      content = _react2.default.createElement('h2', null, 'Right now, I want to ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'eat'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'drink'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'explore'), ', ', _react2.default.createElement('span', { className: 'momentum-deactive' }, 'party'));
 	    }
-	    return _react2.default.createElement('div', null, content);
+	    return _react2.default.createElement('div', { className: 'momentum-welcome-container' }, content);
 	  }
 	});
 	
@@ -41139,6 +41161,8 @@
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var request = __webpack_require__(436);
 	
 	var Candidate = _react2.default.createClass({
 	  displayName: 'Candidate',
@@ -41163,18 +41187,24 @@
 	  handleSubmit: function handleSubmit(intention) {
 	    console.log(this.props.data);
 	    var data = {
-	      name: this.props.data.name,
-	      intention: intention,
-	      google_place_id: this.props.data.place_id,
-	      neighborhood: this.props.neighborhood
+	      recommendation: {
+	        name: this.props.data.name,
+	        intention: intention,
+	        google_place_id: this.props.data.place_id,
+	        neighborhood: this.props.neighborhood
+	      }
 	    };
 	    console.log(data);
+	
+	    request.post('/recommendations').send(data).set('Content-Type', 'application/json').end(function (err, res) {
+	      console.log(err, res);
+	    });
 	    // TODO: make call to post location...
 	  },
 	  render: function render() {
 	    var voteUi;
 	    if (this.state.expanded) {
-	      voteUi = _react2.default.createElement('div', { className: 'momentum-vote-ui' }, _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'eat'), className: 'momentum-link momentum-space' }, 'eat'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'drink'), className: 'momentum-link momentum-space' }, 'drink'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'explore'), className: 'momentum-link momentum-space' }, 'explore'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'party'), className: 'momentum-link momentum-space' }, 'party'));
+	      voteUi = _react2.default.createElement('div', { className: 'momentum-vote-ui' }, _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'eat'), className: 'momentum-link momentum-eat momentum-space' }, 'eat'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'drink'), className: 'momentum-link momentum-drink momentum-space' }, 'drink'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'explore'), className: 'momentum-link momentum-explore momentum-space' }, 'explore'), _react2.default.createElement('h3', { onClick: this.handleSubmit.bind(null, 'party'), className: 'momentum-link momentum-party momentum-space' }, 'party'));
 	    }
 	
 	    return _react2.default.createElement('div', { className: 'momentum-candidate' }, _react2.default.createElement('h3', { onClick: this.handleClick, className: 'momentum-link' }, this.props.data.name), voteUi);
@@ -41210,15 +41240,15 @@
 	    var get;
 	    var give;
 	    if (this.props.currentView === 'inspiration' || this.props.currentView === 'welcome') {
-	      get = _react2.default.createElement('span', null, 'Get ');
+	      get = _react2.default.createElement('span', { className: 'momentum-space' }, 'Get');
 	      if (this.props.neighborhood) {
-	        give = _react2.default.createElement('span', { className: 'momentum-link', onClick: this.handleClick.bind(null, 'inspire') }, 'Give');
+	        give = _react2.default.createElement('span', { className: 'momentum-link momentum-space', onClick: this.handleClick.bind(null, 'inspire') }, 'Give');
 	      } else {
-	        give = _react2.default.createElement('span', { className: 'momentum-deactive' }, 'Give');
+	        give = _react2.default.createElement('span', { className: 'momentum-deactive momentum-space' }, 'Give');
 	      }
 	    } else {
-	      get = _react2.default.createElement('span', { className: 'momentum-link', onClick: this.handleClick.bind(null, 'welcome') }, 'Get ');
-	      give = _react2.default.createElement('span', null, 'Give');
+	      get = _react2.default.createElement('span', { className: 'momentum-link momentum-space', onClick: this.handleClick.bind(null, 'welcome') }, 'Get');
+	      give = _react2.default.createElement('span', { className: 'momentum-space' }, 'Give');
 	    }
 	
 	    return _react2.default.createElement('div', { className: 'momentum-nav-container' }, _react2.default.createElement('h2', null, get, give));
@@ -41252,23 +41282,51 @@
 	  displayName: 'PlaceList',
 	
 	  getInitialState: function getInitialState() {
-	    return { data: [] };
+	    return { data: [], currentRecommendation: 0 };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
 	    request.get('/places.json').end(function (err, res) {
 	      if (err) return;
-	      console.log(res);
+	      console.log(res.body);
 	      this.setState({ data: res.body });
 	    }.bind(this));
 	  },
-	  render: function render() {
-	    var placeNodes = this.state.data.map(function (place) {
-	      return _react2.default.createElement(_place.Place, { name: place.name, key: place.name });
-	    });
-	    return _react2.default.createElement('div', { className: 'placeList' }, placeNodes);
-	  }
 	
+	  handleSubmit: function handleSubmit(e) {
+	    e.preventDefault();
+	
+	    var currentRecommendation = this.state.currentRecommendation;
+	
+	    var newRecommendation;
+	    if (currentRecommendation < this.state.data.length - 1) {
+	      newRecommendation = currentRecommendation + 1;
+	    } else {
+	      newRecommendation = 0;
+	    }
+	
+	    this.setState({ currentRecommendation: newRecommendation });
+	  },
+	
+	  render: function render() {
+	    console.log(this.state.data);
+	    // var placeNodes = this.state.data.map(function(place) {
+	    //   return (
+	    //     <Place name={place.name} key={place.name} />
+	    //   );
+	    // });
+	    var place = this.state.data[this.state.currentRecommendation];
+	    if (place == undefined) return null;
+	
+	    return _react2.default.createElement('form', { className: 'placeForm', onSubmit: this.handleSubmit }, _react2.default.createElement(_place.Place, { name: place.name, key: place.name, lat: place.latitude, lng: place.longitude }), _react2.default.createElement('input', { type: 'submit', value: this.getNextButtonText() }));
+	  },
+	
+	  getNextButtonText: function getNextButtonText() {
+	    var buttonText = ["Been there, done that", "I don't think so", "Um, no thanks", "Maybe another time", "Hm…no", "I'm not feeling it", "Nope", "Really?", "Let's roll the dice again", "Give me another", "Today ain't the day"];
+	    var min = 0;
+	    var max = buttonText.length - 1;
+	    return buttonText[Math.floor(Math.random() * (max - min + 1)) + min];
+	  }
 	});
 	
 	exports.PlaceList = PlaceList;

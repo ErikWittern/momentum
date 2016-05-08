@@ -1,4 +1,5 @@
 import React from 'react'
+var request = require('superagent')
 
 var Candidate = React.createClass({
   propTypes: {
@@ -23,24 +24,35 @@ var Candidate = React.createClass({
   handleSubmit (intention) {
     console.log(this.props.data)
     var data = {
-      name: this.props.data.name,
-      intention: intention,
-      google_place_id: this.props.data.place_id,
-      neighborhood: this.props.neighborhood
+      recommendation: {
+        name: this.props.data.name,
+        intention: intention,
+        google_place_id: this.props.data.place_id,
+        neighborhood: this.props.neighborhood
+      }
     }
     console.log(data)
+
+    request
+      .post('/recommendations')
+      .send(data)
+      .set('Content-Type', 'application/json')
+      .end(function (err, res) {
+        console.log(err, res)
+      })
     // TODO: make call to post location...
   },
 
   render () {
     var voteUi
     if (this.state.expanded) {
-      voteUi = (<div className='momentum-vote-ui'>
-        <h3 onClick={this.handleSubmit.bind(null, 'eat')} className='momentum-link momentum-space'>eat</h3>
-        <h3 onClick={this.handleSubmit.bind(null, 'drink')} className='momentum-link momentum-space'>drink</h3>
-        <h3 onClick={this.handleSubmit.bind(null, 'explore')} className='momentum-link momentum-space'>explore</h3>
-        <h3 onClick={this.handleSubmit.bind(null, 'party')} className='momentum-link momentum-space'>party</h3>
-      </div>)
+      voteUi = (
+        <div className='momentum-vote-ui'>
+          <h3 onClick={this.handleSubmit.bind(null, 'eat')} className='momentum-link momentum-eat momentum-space'>eat</h3>
+          <h3 onClick={this.handleSubmit.bind(null, 'drink')} className='momentum-link momentum-drink momentum-space'>drink</h3>
+          <h3 onClick={this.handleSubmit.bind(null, 'explore')} className='momentum-link momentum-explore momentum-space'>explore</h3>
+          <h3 onClick={this.handleSubmit.bind(null, 'party')} className='momentum-link momentum-party momentum-space'>party</h3>
+        </div>)
     }
 
     return (
